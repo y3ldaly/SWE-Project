@@ -1,5 +1,6 @@
 require('dotenv').config();  // Load environment variables
 const express = require('express');  // Import express
+const mongoose = require(`mongoose`); 
 
 // Import routes
 const MenuRoutes = require('./routes/menuRoutes');
@@ -20,7 +21,15 @@ app.use('/api/menus', MenuRoutes);
 app.use('/api/orders', OrderRoutes);
 app.use('/api/users', UserRoutes);
 
-// Set the server to listen on a port
-app.listen(process.env.PORT, () => {
-    console.log('Server listening on port', process.env.PORT);
-});
+mongoose.connect(process.env.MONGO_URL)
+    .then(() => {
+        // Set the server to listen on a port
+    app.listen(process.env.PORT, () => {
+    console.log('Server listening on port', process.env.PORT)
+        })
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+
+
