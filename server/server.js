@@ -14,7 +14,7 @@ const app = express();  // Create an express application
 app.use(express.json());  // Handle JSON payloads
 app.use((req, res, next) => {  // Example of a logging middleware
     console.log(req.path, req.method);
-    next();
+    next(); 
 });
 
 // Routes
