@@ -1,7 +1,7 @@
 const express = require(`express`)
 const router = express.Router()
 
-// Here you might implement some logic to handle query parameters for filtering
+// GET REQUEST FOR MENU PAGE
 router.get(`/menu`, (req, res) => {
     res.json({mssg: "Return the entire menu"})
 })
