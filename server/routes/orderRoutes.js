@@ -1,24 +1,28 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.json({ msg: "Get all orders" });
+router.get('/orders', (req, res) => {
+    res.json({ msg: "Return all orders" });
 });
 
-router.get('/:id', (req, res) => {
-    res.json({ msg: "Get specific order details", orderId: req.params.id });
+router.get('/orders/:id', (req, res) => {
+    res.json({ msg: "Retrieve details of an order", orderId: req.params.id });
 });
 
-router.post('/', (req, res) => {
+router.post('/orders', (req, res) => {
     res.json({ msg: "Create a new order", orderDetails: req.body });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/orders/:id', (req, res) => {
     res.json({ msg: "Update an order", orderId: req.params.id, updates: req.body });
 });
 
-router.delete('/:id', (req, res) => {
-    res.json({ msg: "Delete an order", orderId: req.params.id });
+router.put('/orders/:id/freeze', (req, res) => {
+    res.json({ msg: "Freeze an order due to insufficient funds", orderId: req.params.id });
+});
+
+router.delete('/orders/:id', (req, res) => {
+    res.json({ msg: "Cancel an order", orderId: req.params.id });
 });
 
 module.exports = router;

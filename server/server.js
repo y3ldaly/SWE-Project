@@ -1,4 +1,5 @@
 require('dotenv').config() // Loads environment variables
+
 const express = require('express') // Import express
 const mongoose = require('mongoose') // Import Mongoose
 
@@ -9,7 +10,6 @@ const UserRoutes = require('./routes/userRoutes');
 
 // Create express app
 const app = express();
-
 
 // Middleware
 app.use(express.json());  // Handle JSON payloads
