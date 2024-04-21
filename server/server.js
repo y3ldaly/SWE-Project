@@ -24,7 +24,7 @@ app.use('/api/orders', OrderRoutes);
 app.use('/api/users', UserRoutes);
 
 // It's async (takes a while to process) so it returns a promise
-mongoose.connect(process.env.MONG_URL)
+mongoose.connect(process.env.MONGO_URL)
     .then(() => {
         // Set the server to listen on a port
         app.listen(process.env.PORT, () => {

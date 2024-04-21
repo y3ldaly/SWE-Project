@@ -1,37 +1,32 @@
 const express = require('express');
+const authenticateToken = require('../middleware/authMiddleware');
+const checkRole = require('../middleware/roleMiddleware');  // Corrected import
+const userController = require('../controllers/userController');
+
 const router = express.Router();
 
-// Might not be needed
-router.get('/users', (req, res) => {
-    res.json({ msg: "Return a list of all registered users" });
-});
+// Return a list of all registered users, restricted to admin users
+router.get('/users', authenticateToken, checkRole(['admin']), userController.getAllUsers);
 
-router.get('/users/:id', (req, res) => {
-    res.json({ msg: "Return a user's details", userId: req.params.id });
-});
+// Return a user’s details, requires authentication
+router.get('/users/:id', authenticateToken, userController.getUserById);
 
-router.post('/users/register', (req, res) => {
-    res.json({ msg: "Register a new user", userDetails: req.body });
-});
+// Register a new user, public access
+router.post('/users/register', userController.registerUser);
 
-router.post('/users/login', (req, res) => {
-    res.json({ msg: "Authenticate a user and issue a token", userDetails: req.body });
-});
+// Authenticate a user and issue a token, public access
+router.post('/users/login', userController.loginUser);
 
-router.put('/users/:id', (req, res) => {
-    res.json({ msg: "Update user's profile or status", userId: req.params.id, userDetails: req.body });
-});
+// Update a user's profile or status, requires authentication
+router.put('/users/:id', authenticateToken, userController.updateUser);
 
-router.put('/users/:id/promote', (req, res) => {
-    res.json({ msg: "Promote a user based on positive feedback or VIP status qualification", userId: req.params.id, userDetails: req.body });
-});
+// Promote a user, requires authentication and admin role
+router.put('/users/:id/promote', authenticateToken, checkRole(['admin']), userController.promoteUser);
 
-router.put('/users/:id/demote', (req, res) => {
-    res.json({ msg: "Demote a user based on negative feedback or warnings", userId: req.params.id, userDetails: req.body });
-});
+// Demote a user, requires authentication and admin role
+router.put('/users/:id/demote', authenticateToken, checkRole(['admin']), userController.demoteUser);
 
-router.delete('/users/:id', (req, res) => {
-    res.json({ msg: "Delete a user's account", userId: req.params.id });
-});
+// Delete a user's account, requires authentication and admin role
+router.delete('/users/:id', authenticateToken, checkRole(['admin']), userController.deleteUser);
 
 module.exports = router;
