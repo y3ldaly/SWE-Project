@@ -1,21 +1,23 @@
-const express = require(`express`)
-const router = express.Router()
+// Import necessary libraries and middleware
+const express = require('express');
+const authenticateToken = require('../middleware/authMiddleware');
+const checkRole = require('../middleware/roleMiddleware');
+const menuController = require('../controllers/menuController');
 
-// Here you might implement some logic to handle query parameters for filtering
-router.get(`/menu`, (req, res) => {
-    res.json({mssg: "Return the entire menu"})
-})
+// Create a router object from Express to handle route requests
+const router = express.Router();
 
-router.post('/menu', (req, res) => {
-    res.json({ msg: "Add a new dish to the menu", dishDetails: req.body });
-});
+// Define a route to get all dishes; no authentication required
+router.get('/menu', menuController.getAllDishes);
 
-router.put('/menu/:id', (req, res) => {
-    res.json({ msg: "Update details of an existing dish", dishId: req.params.id, updates: req.body });
-});
+// Define a route to add a new dish; requires authentication and specific roles (chef or manager)
+router.post('/menu', authenticateToken, checkRole(['chef', 'manager']), menuController.addDish);
 
-router.delete('/menu/:id', (req, res) => {
-    res.json({ msg: "Remove a dish from the menu", dishId: req.params.id });
-});
+// Define a route to update an existing dish; also requires authentication and specific roles
+router.put('/menu/:id', authenticateToken, checkRole(['chef', 'manager']), menuController.updateDish);
 
+// Define a route to delete a dish; requires authentication and specific roles as well
+router.delete('/menu/:id', authenticateToken, checkRole(['chef', 'manager']), menuController.deleteDish);
+
+// Export the router to be used in other parts of the application
 module.exports = router;

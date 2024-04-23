@@ -1,28 +1,26 @@
 const express = require('express');
+const authenticateToken = require('../middleware/authMiddleware');
+const orderController = require('../controllers/orderController');
+
+
 const router = express.Router();
 
-router.get('/orders', (req, res) => {
-    res.json({ msg: "Return all orders" });
-});
+// Retrieves all orders, potentially needs authentication and admin role
+router.get('/orders', authenticateToken, orderController.getAllOrders);
 
-router.get('/orders/:id', (req, res) => {
-    res.json({ msg: "Retrieve details of an order", orderId: req.params.id });
-});
+// Retrieve details of a specific order, requires authentication
+router.get('/orders/:id', authenticateToken, orderController.getOrderById);
 
-router.post('/orders', (req, res) => {
-    res.json({ msg: "Create a new order", orderDetails: req.body });
-});
+// Create a new order, requires authentication
+router.post('/orders', authenticateToken, orderController.createOrder);
 
-router.put('/orders/:id', (req, res) => {
-    res.json({ msg: "Update an order", orderId: req.params.id, updates: req.body });
-});
+// Update an order, requires authentication and possibly checks for order status
+router.put('/orders/:id', authenticateToken, orderController.updateOrder);
 
-router.put('/orders/:id/freeze', (req, res) => {
-    res.json({ msg: "Freeze an order due to insufficient funds", orderId: req.params.id });
-});
+// Freeze an order due to insufficient funds, requires authentication and admin role
+router.put('/orders/:id/freeze', authenticateToken, orderController.freezeOrder);
 
-router.delete('/orders/:id', (req, res) => {
-    res.json({ msg: "Cancel an order", orderId: req.params.id });
-});
+// Cancel an order, requires authentication and possibly admin role
+router.delete('/orders/:id', authenticateToken, orderController.cancelOrder);
 
 module.exports = router;
