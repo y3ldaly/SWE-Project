@@ -1,10 +1,9 @@
-import Button from './button/Button'
+import Button from '../button/Button'
 import Navbar from '../navbar/Navbar'
-import './index.css'
+import '../index.css'
 import pickup from './pickup.png'
 import delivery from './delivery.png'
 import instore from './in-store.png'
-
 
 function App() {
     return(
