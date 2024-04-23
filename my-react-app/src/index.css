@@ -1,0 +1,18 @@
+/* global styles */
+
+body {
+    background-color: skyblue;
+    background: linear-gradient(to top, #C0CAAD, #9DA9A0);
+    background-repeat: no-repeat;
+    background-attachment: fixed; /*stretches background*/
+    background-position: center;
+    background-size: cover;
+    margin: 10px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+#order-prompt {
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+}
