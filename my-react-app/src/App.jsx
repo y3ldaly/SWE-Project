@@ -1,9 +1,4 @@
-import Order from './Order'
-import './index.css'
-// import pickup from './pickup.png'
-// import delivery from './delivery.png'
-// import instore from './in-store.png'
-
+import Order from './order/Order'
 
 function App() {
     return(
