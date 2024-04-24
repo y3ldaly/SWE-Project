@@ -1,4 +1,4 @@
-import Navbar from '../navbar/Navbar'
+import Navbar from '../../navbar/Navbar'
 import MenuButton from './MenuButton'
 import './MenuButton.css'
 import kabsa from './kabsa.png'
