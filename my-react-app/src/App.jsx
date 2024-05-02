@@ -1,26 +1,19 @@
-import Order from './order/Order'
-import MenuPage from './menuPage/firstPage/MenuPage'
-import FullMenu from './menuPage/fullMenu/fullMenu'
-// import PaymentPage from './paymentPage/paymentPage'
-import ManagerPage from './manager/Manager'
-// import hummus from './menuPage/fullMenu/appetizers/hummus.jpg'
-import Promotion from './manager/promotion/firstPage/Promotion'
-import DemotionFirstPage from './manager/demotion/firstPage/DemotionFirstPage'
-import HomeScreen from './HomeScreen/HomeScreen'
-import Navbar from './navbar/Navbar'
+// use this file to make sure your components work
 
+// import SurferNavbar from "./users/surfers/components/SurferNavbar"
+// import UserNavbar from "./users/registered/components/UserNavbar"
+// import ManagerNavbar from "./managers/components/ManagerNavbar"
+// import DashboardPage from "./managers/pages/dashboard/DashboardPage"
+// import PromoteChefsPage from "./managers/pages/promoteChefs/PromoteChefsPage"
+// import DemoteChefsPage from "./managers/pages/demoteChefs/DemoteChefsPage"
+// import FullMenuPage from "./users/registered/pages/FullMenuPage"
+// import MenuOverviewPage from "./users/registered/pages/MenuOverviewPage"
+// import SelectOrderTypePage from "./users/registered/pages/SelectOrderTypePage"
+// import PaymentPage from "./users/registered/pages/PaymentPage"
 
 function App() {
     return(
         <>
-            {/* <Order/> */}
-            {/* <FullMenu/> */}
-            {/* <MenuPage /> */}
-            {/* <PaymentPage/> */}
-            {/* <ManagerPage/> */}
-            {/* <Promotion/> */}
-            {/* <DemotionFirstPage/> */}
-            <HomeScreen/>
             
         </>
     )
