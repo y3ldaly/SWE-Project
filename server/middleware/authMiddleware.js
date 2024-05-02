@@ -1,33 +1,25 @@
 const jwt = require('jsonwebtoken');
 
-// Middleware function to authenticate token provided in the request headers.
-const authenticateToken = (req, res, next) => {
-  // Extract the 'Authorization' header from the request.
-  const authHeader = req.headers['authorization'];
-  
-  // Check if the authorization header is present and correctly formatted
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    // If there is no token provided or the format is incorrect, send a 401 Unauthorized status.
-    return res.sendStatus(401);
-  }
+const authMiddleware = (req, res, next) => {
+  let token;
 
-  // Get the token from the header. It's usually formatted as "Bearer TOKEN".
-  const token = authHeader.split(' ')[1]; // Splits the header into parts and gets the token part.
-
-  // Verify the token using the secret key.
-  jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
-    if (err) {
-      // Provide more detailed error information based on the type of JWT error
-      const message = err.name === "JsonWebTokenError" ? "Invalid token" :
-                      err.name === "TokenExpiredError" ? "Token expired" : "Token not active";
-      // If the token is invalid or expired, send a 403 Forbidden status with the error message.
-      return res.status(403).send({ message });
+  // Check if an authorization header exists and starts with 'Bearer'
+  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    // Try to extract and verify the token
+    try {
+      token = req.headers.authorization.split(' ')[1]; // Extract the token from the header
+      const decoded = jwt.verify(token, process.env.JWT_SECRET); // Verify the token
+      req.user = decoded; // Attach user data to the request object
+      next(); // Proceed to the next middleware
+    } catch (error) {
+      // Handle errors related to token verification (such as expiration or tampering)
+      console.error('Not authorized, token failed:', error.message);
+      res.status(401).json({ message: 'Not authorized, token failed' });
     }
-    // If valid, attach the decoded user to the request object.
-    req.user = user;
-    next(); // Move to the next middleware function or route handler.
-  });
+  } else {
+    // Handle cases where no token is present
+    res.status(401).json({ message: 'No token provided, authorization denied' });
+  }
 };
 
-// Export the middleware function for use in other parts of the application.
-module.exports = authenticateToken;
+module.exports = authMiddleware
