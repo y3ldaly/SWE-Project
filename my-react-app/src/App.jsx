@@ -1,21 +1,27 @@
 import Order from './order/Order'
 import MenuPage from './menuPage/firstPage/MenuPage'
-import Appetizers from './menuPage/fullMenu/appetizers/Appetizers'
-import MainDishes from './menuPage/fullMenu/mainDishes/mainDishes'
-import SignatureDishes from './menuPage/fullMenu/signatureDishes/SignatureDishes'
 import FullMenu from './menuPage/fullMenu/fullMenu'
-import PaymentPage from './paymentPage/paymentPage'
+// import PaymentPage from './paymentPage/paymentPage'
+import ManagerPage from './manager/Manager'
+// import hummus from './menuPage/fullMenu/appetizers/hummus.jpg'
+import Promotion from './manager/promotion/firstPage/Promotion'
+import DemotionFirstPage from './manager/demotion/firstPage/DemotionFirstPage'
+import HomeScreen from './HomeScreen/HomeScreen'
+import Navbar from './navbar/Navbar'
 
 
 function App() {
     return(
         <>
-            {/* <Appetizers /> */}
             {/* <Order/> */}
-            {/* <MainDishes /> */}
-            {/* <SignatureDishes /> */}
-            <FullMenu/>
+            {/* <FullMenu/> */}
+            {/* <MenuPage /> */}
             {/* <PaymentPage/> */}
+            {/* <ManagerPage/> */}
+            {/* <Promotion/> */}
+            {/* <DemotionFirstPage/> */}
+            <HomeScreen/>
+            
         </>
     )
 }

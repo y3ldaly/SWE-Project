@@ -1,0 +1,22 @@
+body {
+    margin: 0px;
+}
+
+.header {
+    background-color: tomato;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.title {
+    margin: 0;
+    flex: 1;
+    text-align: center;
+}
+
+.profile-pic {
+    width: 40px;
+    margin-left: auto;
+}
