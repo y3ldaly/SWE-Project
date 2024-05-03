@@ -1,4 +1,6 @@
-const PaymentModel = require('../models/Payment');
+const TransactionModel = require('../models/transactionModel');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 // Controller for handling payment operations
 const paymentController = {

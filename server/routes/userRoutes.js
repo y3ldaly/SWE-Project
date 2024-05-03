@@ -1,15 +1,14 @@
 const express = require('express');
-const authenticateToken = require('../middleware/authMiddleware');
-const checkRole = require('../middleware/roleMiddleware');  // Corrected import
-const userController = require('../controllers/userController');
-
 const router = express.Router();
+const userController = require('../controllers/userController');
+const authMiddleware = require('../middleware/authMiddleware');
+const roleMiddleware = require('../middleware/roleMiddleware');
 
 // Return a list of all registered users, restricted to admin users
-router.get('/users', authenticateToken, checkRole(['admin']), userController.getAllUsers);
+router.get('/users', authMiddleware, roleMiddleware(['admin']), userController.getAllUsers);
 
 // Return a user’s details, requires authentication
-router.get('/users/:id', authenticateToken, userController.getUserById);
+router.get('/users/:id', authMiddleware, userController.getUserById);
 
 // Register a new user, public access
 router.post('/users/register', userController.registerUser);
@@ -18,15 +17,15 @@ router.post('/users/register', userController.registerUser);
 router.post('/users/login', userController.loginUser);
 
 // Update a user's profile or status, requires authentication
-router.put('/users/:id', authenticateToken, userController.updateUser);
+router.put('/users/:id', authMiddleware, userController.updateUser);
 
 // Promote a user, requires authentication and admin role
-router.put('/users/:id/promote', authenticateToken, checkRole(['admin']), userController.promoteUser);
+router.put('/users/:id/promote', authMiddleware, roleMiddleware(['admin']), userController.promoteUser);
 
 // Demote a user, requires authentication and admin role
-router.put('/users/:id/demote', authenticateToken, checkRole(['admin']), userController.demoteUser);
+router.put('/users/:id/demote', authMiddleware, roleMiddleware(['admin']), userController.demoteUser);
 
 // Delete a user's account, requires authentication and admin role
-router.delete('/users/:id', authenticateToken, checkRole(['admin']), userController.deleteUser);
+router.delete('/users/:id', authMiddleware, roleMiddleware(['admin']), userController.deleteUser);
 
 module.exports = router;

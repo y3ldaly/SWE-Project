@@ -1,5 +1,6 @@
-// Import the Menu model so we can interact with the database about menu items.
-const MenuModel = require('../models/Menu');
+const MenuModel = require('../models/menuModel');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 // This object contains functions that handle requests related to menu items.
 const menuController = {

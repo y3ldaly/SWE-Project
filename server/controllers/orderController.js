@@ -1,4 +1,6 @@
-const OrderModel = require('../models/Order');
+const OrderModel = require('../models/orderModel');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 const orderController = {
     getAllOrders: (req, res) => {
