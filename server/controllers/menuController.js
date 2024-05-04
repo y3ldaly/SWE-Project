@@ -12,7 +12,7 @@ const bcrypt = require('bcryptjs');
 */
 
 const menuController = {
-
+    
     // Create a new menu item by a chef
     createMenuItem: (req, res) => {
         // Validate input data
@@ -61,6 +61,7 @@ const menuController = {
 };
 
 module.exports = menuController;
+
 
 
 

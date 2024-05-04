@@ -4,24 +4,64 @@ const jwt = require('jsonwebtoken');
 
 /*
     Essentials:
-                - registerUser
+                - registerUser (Done)
                 - loginUser
                 - updateUserProfile
                 - manageUserDeposit
 */
 
 const userController = {
+    
+    registerUser: async (req, res) => {
+        const { username, password, role, email } = req.body;
 
-    // Registers a new user in the system
-    registerUser: (req, res) => {
-        // Extract user data from req.body
-        // Validate user data
-        // Check if user already exists
-        // Save user to database
-        // Send confirmation response
+        try {
+            // Check if user already exists by username or email
+            const existingUser = await UserModel.findOne({ $or: [{ username }, { email }] });
+            if (existingUser) {
+                return res.status(409).json({ message: "User already exists with the same username or email" });
+            }
+
+            // Hash the password
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(password, salt);
+
+            // Create a new user object
+            const newUser = new UserModel({
+                username,
+                password: hashedPassword,
+                role,
+                email,
+                status: 'active',
+                warnings: 0,
+                spending: 0,
+                ordersCount: 0,
+                isVIP: false
+            });
+
+            // Save the new user
+            const savedUser = await newUser.save();
+
+            // Create a token for the new user with a 24-hour expiration
+            const token = jwt.sign(
+                { userId: savedUser._id, username: savedUser.username, role: savedUser.role },
+                process.env.JWT_SECRET,
+                { expiresIn: '24h' }  // Set expiration to 24 hours
+            );
+
+            // Send confirmation response with token and user details
+            res.status(201).json({
+                message: "User registered successfully",
+                userId: savedUser._id,
+                token,
+                role: savedUser.role,
+                isVIP: savedUser.isVIP
+            });
+        } catch (error) {
+            res.status(500).json({ message: "Error registering user", error: error.message });
+        }
     },
 
-    // Handles user login
     loginUser: (req, res) => {
         // Validate login credentials
         // Authenticate user
@@ -99,6 +139,10 @@ const userController = {
 };
 
 module.exports = userController;
+
+
+
+
 
 
 

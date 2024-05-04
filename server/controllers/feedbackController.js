@@ -10,7 +10,7 @@ const bcrypt = require('bcryptjs');
 */
 
 const feedbackController = {
-
+    
     // Submit new feedback (complaint or compliment)
     submitFeedback: (req, res) => {
         // Validate feedback data from req.body

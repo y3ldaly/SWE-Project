@@ -12,7 +12,7 @@ const bcrypt = require('bcryptjs');
 */
 
 const orderController = {
-
+    
     // Place a new order
     placeOrder: (req, res) => {
         // Validate the incoming order data
@@ -77,6 +77,11 @@ const orderController = {
 };
 
 module.exports = orderController;
+
+
+
+
+
 
 
 

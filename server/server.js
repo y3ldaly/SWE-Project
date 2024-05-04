@@ -3,9 +3,13 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/database');
 const errorMiddleware = require('./middleware/errorMiddleware');
-// Import Routes
-// ...
 dotenv.config();
+
+const userRoutes = require('./routes/userRoutes');
+// const transactionRoutes = require('./routes/transactionRoutes');
+// const orderRoutes = require('./routes/orderRoutes');
+// const menuRoutes = require('./routes/menuRoutes');
+// const feedbackRoutes = require('./routes/feedbackRoutes');
 
 // Connect to MongoDB
 connectDB();
@@ -17,8 +21,11 @@ app.use(cors());
 // Middleware to accept JSON in the request bodies
 app.use(express.json());
 
-// Use Routes
-// ...
+app.use('/api/users', userRoutes);
+// app.use('/api/transactions', transactionRoutes);
+// app.use('/api/orders', orderRoutes);
+// app.use('/api/menu', menuRoutes);
+// app.use('/api/feedback', feedbackRoutes);
 
 app.use(errorMiddleware.notFound);
 app.use(errorMiddleware.errorHandler);

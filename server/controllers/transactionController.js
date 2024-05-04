@@ -9,7 +9,7 @@ const bcrypt = require('bcryptjs');
 */
 
 const transactionController = {
-
+    
     // Process a deposit into a customer's account
     depositFunds: (req, res) => {
         // Validate deposit amount
@@ -70,6 +70,7 @@ const transactionController = {
 };
 
 module.exports = transactionController;
+
 
 
 
