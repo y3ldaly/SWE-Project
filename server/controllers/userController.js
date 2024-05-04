@@ -30,8 +30,8 @@ const userController = {
             const newUser = new UserModel({
                 username,
                 password: hashedPassword,
-                role,
                 email,
+                role,
                 status: 'active',
                 warnings: 0,
                 spending: 0,
