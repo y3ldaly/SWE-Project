@@ -5,6 +5,6 @@ const authMiddleware = require('../middleware/authMiddleware');
 const roleMiddleware = require('../middleware/roleMiddleware');
 
 // Register a new user, public access
-// router.post('/register', userController.registerUser);
+router.post('/register', userController.registerUser);
 
 module.exports = router;
