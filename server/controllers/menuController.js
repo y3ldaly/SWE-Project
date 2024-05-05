@@ -14,11 +14,38 @@ const bcrypt = require('bcryptjs');
 const menuController = {
     
     // Create a new menu item by a chef
-    createMenuItem: (req, res) => {
+    createMenuItem: async (req, res) => {
         // Validate input data
         // Check if the chef is authorized to add menu items
         // Save the new menu item to the database
         // Return success response with the created menu item details
+        const { chefId, dishName, description, price, keywords, imageUrl } = req.body;
+
+    // Validate input data
+    if (!chefId || !dishName || !description || !price || !imageUrl) {
+        return res.status(400).json({ message: "All fields are required" });
+    }
+
+    // Check if the chef is authorized to add menu items
+    // This assumes authentication middleware sets req.user
+    if (req.user.role !== 'chef' || req.user.id !== chefId) {
+        return res.status(403).json({ message: "Unauthorized" });
+    }
+
+    // Check for duplicate dish names
+    const existingDish = await MenuModel.findOne({ dishName });
+    if (existingDish) {
+        return res.status(409).json({ message: "Dish already exists" });
+    }
+
+    // Save the new menu item to the database
+    const newMenuItem = new MenuModel({ chefId, dishName, description, price, keywords, imageUrl });
+    try {
+        await newMenuItem.save();
+        res.status(201).json(newMenuItem);
+    } catch (error) {
+        res.status(500).json({ message: "Error saving the dish", error: error.message });
+    }
     },
 
     // Update an existing menu item

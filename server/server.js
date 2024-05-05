@@ -6,6 +6,7 @@ const errorMiddleware = require('./middleware/errorMiddleware');
 dotenv.config();
 
 const userRoutes = require('./routes/userRoutes');
+const menuRoutes = require('./routes/menuRoutes');
 // const transactionRoutes = require('./routes/transactionRoutes');
 // const orderRoutes = require('./routes/orderRoutes');
 // const menuRoutes = require('./routes/menuRoutes');
@@ -24,7 +25,7 @@ app.use(express.json());
 app.use('/api/users', userRoutes);
 // app.use('/api/transactions', transactionRoutes);
 // app.use('/api/orders', orderRoutes);
-// app.use('/api/menu', menuRoutes);
+app.use('/api/menu', menuRoutes);
 // app.use('/api/feedback', feedbackRoutes);
 
 app.use(errorMiddleware.notFound);
