@@ -11,13 +11,13 @@ router.post('/',
   menuController.createMenuItem);
 
 // Update an existing menu item (only accessible by the chef who created it)
-router.put('/:dishId',
+router.put('/:dishName',
   authMiddleware,
   roleMiddleware(['chef']),
   menuController.updateMenuItem);
 
 // Delete a menu item (only accessible by the chef who created it)
-router.delete('/:dishId',
+router.delete('/:dishName',
   authMiddleware,
   roleMiddleware(['chef']),
   menuController.deleteMenuItem);
@@ -27,7 +27,7 @@ router.get('/',
   menuController.listMenuItems);
 
 // Get detailed information about a single menu item (accessible to everyone)
-router.get('/:dishId',
+router.get('/:dishName',
   menuController.getMenuItemDetails);
 
 // Rate a menu item (only accessible by customers)
@@ -35,5 +35,5 @@ router.post('/:dishId/rate',
   authMiddleware,
   roleMiddleware(['customer', 'vip']),
   menuController.rateMenuItem);
-  
+
 module.exports = router;
