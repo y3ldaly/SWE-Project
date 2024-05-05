@@ -6,7 +6,7 @@ const transactionSchema = new Schema({
     type: {
         type: String,
         required: true,
-        enum: ['deposit', 'withdrawal', 'payment']
+        enum: ['deposit', 'refund']
     },
     amount: { type: Number, required: true },
     date: { type: Date, default: Date.now }

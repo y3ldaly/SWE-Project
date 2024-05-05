@@ -4,17 +4,36 @@ const menuController = require('../controllers/menuController');
 const authMiddleware = require('../middleware/authMiddleware');
 const roleMiddleware = require('../middleware/roleMiddleware');
 
-// Define a route to get all dishes; no authentication required
-// router.get('/menu', menuController.getAllDishes);
+// Create a new menu item (only accessible by chefs)
+router.post('/',
+  authMiddleware,
+  roleMiddleware(['chef']),
+  menuController.createMenuItem);
 
-// // Define a route to add a new dish; requires authentication and specific roles (chef or manager)
-// router.post('/menu', authMiddleware, roleMiddleware(['chef', 'manager']), menuController.addDish);
+// Update an existing menu item (only accessible by the chef who created it)
+router.put('/:dishName',
+  authMiddleware,
+  roleMiddleware(['chef']),
+  menuController.updateMenuItem);
 
-// // Define a route to update an existing dish; also requires authentication and specific roles
-// router.put('/menu/:id', authMiddleware, roleMiddleware(['chef', 'manager']), menuController.updateDish);
+// Delete a menu item (only accessible by the chef who created it)
+router.delete('/:dishName',
+  authMiddleware,
+  roleMiddleware(['chef']),
+  menuController.deleteMenuItem);
 
-// // Define a route to delete a dish; requires authentication and specific roles as well
-// router.delete('/menu/:id', authMiddleware, roleMiddleware(['chef', 'manager']), menuController.deleteDish);
+// List all menu items (accessible to everyone)
+router.get('/',
+  menuController.listMenuItems);
 
-// // Export the router to be used in other parts of the application
+// Get detailed information about a single menu item (accessible to everyone)
+router.get('/:dishName',
+  menuController.getMenuItemDetails);
+
+// Rate a menu item (only accessible by customers)
+router.post('/:dishId/rate',
+  authMiddleware,
+  roleMiddleware(['customer', 'vip']),
+  menuController.rateMenuItem);
+
 module.exports = router;
