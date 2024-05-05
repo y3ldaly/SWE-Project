@@ -1,10 +1,11 @@
 const UserModel = require('../models/userModel');
+const TransactionModel = require('../models/transactionModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 /*
-    Essentials:
-                - registerUser (Done)
+    Essentials (Done):
+                - registerUser
                 - loginUser
                 - updateUserProfile
                 - manageUserDeposit
@@ -13,7 +14,7 @@ const jwt = require('jsonwebtoken');
 const userController = {
     
     registerUser: async (req, res) => {
-        const { username, password, role, email } = req.body;
+        const { firstName, lastName, username, password, role, email } = req.body;
 
         try {
             // Check if user already exists by username or email
@@ -28,6 +29,8 @@ const userController = {
 
             // Create a new user object
             const newUser = new UserModel({
+                firstName,
+                lastName,
                 username,
                 password: hashedPassword,
                 email,
@@ -52,8 +55,12 @@ const userController = {
             // Send confirmation response with token and user details
             res.status(201).json({
                 message: "User registered successfully",
-                userId: savedUser._id,
                 token,
+                userId: savedUser._id,
+                firstName: savedUser.firstName,
+                lastName: savedUser.lastName,
+                username: savedUser.username,
+                email: savedUser.email,
                 role: savedUser.role,
                 isVIP: savedUser.isVIP
             });
@@ -62,21 +69,88 @@ const userController = {
         }
     },
 
-    loginUser: (req, res) => {
-        // Validate login credentials
-        // Authenticate user
-        // Issue a token (JWT or similar)
-        // Send success response with token
-    },
+    loginUser: async (req, res) => {
+        const { username, password } = req.body;
 
-    // Updates user profile information
-    updateUserProfile: (req, res) => {
-        // Authenticate and authorize user
-        // Validate new profile data
-        // Update user in database
-        // Send success response
-    },
+        try {
+            // Find user by username or email
+            const user = await UserModel.findOne({ $or: [{ username }, { email: username }] });
+            if (!user) {
+                return res.status(401).json({ message: "Invalid username or email" });
+            }
 
+            // Check if the provided password matches the stored hashed password
+            const isMatch = await bcrypt.compare(password, user.password);
+            if (!isMatch) {
+                return res.status(401).json({ message: "Invalid password" });
+            }
+
+            // Generate JWT token
+            const token = jwt.sign(
+                { userId: user._id, username: user.username, role: user.role },
+                process.env.JWT_SECRET,
+                { expiresIn: '24h' }
+            );
+
+            // Send success response with token
+            res.status(200).json({
+                message: "Login successful",
+                token,
+                userId: user._id,
+                role: user.role,
+                isVIP: user.isVIP
+            });
+
+        } catch (error) {
+            res.status(500).json({ message: "Error logging in user", error: error.message });
+          }
+    },
+    
+    updateUserProfile: async (req, res) => {
+        const { firstName, lastName, username, email, password } = req.body;
+        const userId = req.user.userId;  // Extracted from JWT
+    
+        try {
+            // Find the user by their ID
+            const user = await UserModel.findById(userId);
+            if (!user) {
+                return res.status(404).json({ message: "User not found" });
+            }
+    
+            // Optional: Check if the new username or email already exists
+            const doesExist = await UserModel.findOne({
+                $or: [{ username }, { email }],
+                _id: { $ne: userId }
+            });
+            if (doesExist) {
+                return res.status(400).json({ message: "Username or email already in use" });
+            }
+    
+            // Update fields if provided
+            if (username) user.username = username;
+            if (email) user.email = email;
+            if (firstName) user.firstName = firstName;
+            if (lastName) user.lastName = lastName;
+    
+            // If a new password is provided, hash it before saving
+            if (password) {
+                const salt = await bcrypt.genSalt(10);
+                user.password = await bcrypt.hash(password, salt);
+            }
+    
+            // Save the updated user info
+            await user.save();
+    
+            // Respond to the client
+            res.status(200).json({
+                message: "User profile updated successfully",
+                user: { id: user._id, username: user.username, email: user.email }
+            });
+        } catch (error) {
+            res.status(500).json({ message: "Failed to update user profile", error: error.message });
+        }
+    },
+    
     // Activates or deactivates a user account
     toggleUserActiveStatus: (req, res) => {
         // Check manager authorization
@@ -130,127 +204,46 @@ const userController = {
         // Send closure confirmation
     },
 
-    // Handles deposit actions for user accounts
-    manageUserDeposit: (req, res) => {
-        // Authenticate and validate deposit amount
-        // Update user's deposit balance in the database
-        // Send success or error response
+    manageUserDeposit: async (req, res) => {
+        const { amount } = req.body;
+        const userId = req.user.userId;
+
+        if (!amount || amount <= 0) {
+            return res.status(400).json({ message: "Invalid deposit amount" });
+        }
+
+        try {
+            // Validate user exists
+            const user = await UserModel.findById(userId);
+            if (!user) {
+                return res.status(404).json({ message: "User not found" });
+            }
+
+            // Create a transaction record
+            const transaction = new TransactionModel({
+                user: userId,
+                type: 'deposit',
+                amount: amount
+            });
+            await transaction.save();
+            
+            user.spending += amount;  // Assuming 'spending' accumulates deposits
+            await user.save();
+
+            // Send success response
+            res.status(201).json({
+                message: "Deposit successful",
+                transactionId: transaction._id,
+                amount: transaction.amount,
+                type: transaction.type,
+                date: transaction.date
+            });
+        } catch (error) {
+            console.error("Error managing deposit:", error);
+            res.status(500).json({ message: "Failed to manage deposit", error: error.message });
+        }
     }
+
 };
 
 module.exports = userController;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const userController = {
-//     getAllUsers: (req, res) => {
-//         UserModel.find({}, (err, users) => {
-//             if (err) {
-//                 console.error('Error retrieving all users:', err);
-//                 return res.status(500).json({ message: "Error fetching users." });
-//             }
-//             res.status(200).json(users);
-//         });
-//     },
-
-//     registerUser: async (req, res) => {
-//         try {
-//             const newUser = new UserModel(req.body);
-//             await newUser.save();
-//             res.status(201).json({ message: 'User registered successfully' });
-//         } catch (err) {
-//             console.error('Error registering user:', err);
-//             res.status(500).json({ message: "Error registering user." });
-//         }
-//     },
-
-//     loginUser: async (req, res) => {
-//         try {
-//             const user = await UserModel.findOne({ email: req.body.email });
-//             if (user && await user.comparePassword(req.body.password)) {
-//                 const token = jwt.sign({ id: user._id, role: user.role }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
-//                 res.status(200).json({ message: "Logged in successfully", token });
-//             } else {
-//                 res.status(401).json({ message: 'Invalid credentials' });
-//             }
-//         } catch (err) {
-//             console.error('Error logging in user:', err);
-//             res.status(500).json({ message: "Error logging in user." });
-//         }
-//     },
-
-//     updateUser: (req, res) => {
-//         UserModel.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
-//             if (err) {
-//                 console.error('Error updating user:', err);
-//                 return res.status(500).json({ message: "Error updating user." });
-//             }
-//             if (!user) {
-//                 return res.status(404).json({ message: 'User not found' });
-//             }
-//             res.status(200).json(user);
-//         });
-//     },
-
-//     getUserById: (req, res) => {
-//         UserModel.findById(req.params.id, (err, user) => {
-//             if (err) {
-//                 console.error('Error fetching user by ID:', err);
-//                 return res.status(500).json({ message: "Error fetching user." });
-//             }
-//             if (!user) {
-//                 return res.status(404).json({ message: 'User not found' });
-//             }
-//             res.status(200).json(user);
-//         });
-//     },
-
-//     promoteUser: (req, res) => {
-//         UserModel.findByIdAndUpdate(req.params.id, { $set: { role: 'VIP' } }, { new: true }, (err, user) => {
-//             if (err) {
-//                 console.error('Error promoting user:', err);
-//                 return res.status(500).json({ message: "Error promoting user." });
-//             }
-//             if (!user) {
-//                 return res.status(404).json({ message: 'User not found' });
-//             }
-//             res.status(200).json({ message: 'User was successfully promoted to VIP', user });
-//         });
-//     },
-
-//     demoteUser: (req, res) => {
-//         UserModel.findByIdAndUpdate(req.params.id, { $set: { role: 'customer' } }, { new: true }, (err, user) => {
-//             if (err) {
-//                 console.error('Error demoting user:', err);
-//                 return res.status(500).json({ message: "Error demoting user." });
-//             }
-//             if (!user) {
-//                 return res.status(404).json({ message: 'User not found' });
-//             }
-//             res.status(200).json({ message: 'User demoted successfully', user });
-//         });
-//     },
-
-//     deleteUser: (req, res) => {
-//         UserModel.findByIdAndRemove(req.params.id, (err) => {
-//             if (err) {
-//                 console.error('Error deleting user:', err);
-//                 return res.status(500).json({ message: "Error deleting user." });
-//             }
-//             res.status(204).json({ message: 'User deleted' });
-//         });
-//     }
-// };
-
-// module.exports = userController;
