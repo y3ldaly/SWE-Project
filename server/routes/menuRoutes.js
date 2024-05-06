@@ -3,6 +3,7 @@ const router = express.Router();
 const menuController = require('../controllers/menuController');
 const authMiddleware = require('../middleware/authMiddleware');
 const roleMiddleware = require('../middleware/roleMiddleware');
+const errorMiddleware = require('../middleware/errorMiddleware');
 
 // Create a new menu item (only accessible by chefs)
 router.post('/',
@@ -29,11 +30,5 @@ router.get('/',
 // Get detailed information about a single menu item (accessible to everyone)
 router.get('/:dishName',
   menuController.getMenuItemDetails);
-
-// Rate a menu item (only accessible by customers)
-router.post('/:dishId/rate',
-  authMiddleware,
-  roleMiddleware(['customer', 'vip']),
-  menuController.rateMenuItem);
 
 module.exports = router;

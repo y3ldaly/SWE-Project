@@ -14,7 +14,10 @@ const userSchema = new Schema({
   },
   status: { type: String, default: 'active', enum: ['active', 'deactivated'] },
   warnings: { type: Number, default: 0 },
-  spending: { type: Number, default: 0 },
+  compliments: { type: Number, default: 0 },
+  complaints: { type: Number, default: 0 },
+  salary: { type: Number, default: 0 },
+  balance: { type: Number, default: 0 },
   ordersCount: { type: Number, default: 0 },
   isVIP: { type: Boolean, default: false }
 });

@@ -1,15 +1,10 @@
 const UserModel = require('../models/userModel');
-const TransactionModel = require('../models/transactionModel');
+const OrderModel = require('../models/orderModel');
+const MenuModel = require('../models/menuModel');
+const FeedbackModel = require('../models/feedbackModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-/*
-    Essentials (Done):
-                - registerUser
-                - loginUser
-                - updateUserProfile
-                - manageUserDeposit
-*/
 
 const userController = {
     
@@ -180,14 +175,6 @@ const userController = {
         // Send list of users
     },
 
-    // Handles complaints or compliments submitted about or by users
-    handleUserFeedback: (req, res) => {
-        // Authenticate user
-        // Log feedback in the system
-        // Notify involved parties or manager for further action
-        // Update necessary user fields based on feedback outcome
-    },
-
     // Resolves disputes concerning user complaints
     resolveDisputes: (req, res) => {
         // Authenticate and authorize managerial role
@@ -202,48 +189,69 @@ const userController = {
         // Remove user data from database or mark as closed
         // Handle any account balance or open orders
         // Send closure confirmation
-    },
-
-    manageUserDeposit: async (req, res) => {
-        const { amount } = req.body;
-        const userId = req.user.userId;
-
-        if (!amount || amount <= 0) {
-            return res.status(400).json({ message: "Invalid deposit amount" });
-        }
-
-        try {
-            // Validate user exists
-            const user = await UserModel.findById(userId);
-            if (!user) {
-                return res.status(404).json({ message: "User not found" });
-            }
-
-            // Create a transaction record
-            const transaction = new TransactionModel({
-                user: userId,
-                type: 'deposit',
-                amount: amount
-            });
-            await transaction.save();
-            
-            user.spending += amount;  // Assuming 'spending' accumulates deposits
-            await user.save();
-
-            // Send success response
-            res.status(201).json({
-                message: "Deposit successful",
-                transactionId: transaction._id,
-                amount: transaction.amount,
-                type: transaction.type,
-                date: transaction.date
-            });
-        } catch (error) {
-            console.error("Error managing deposit:", error);
-            res.status(500).json({ message: "Failed to manage deposit", error: error.message });
-        }
     }
 
 };
 
 module.exports = userController;
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // Handles complaints or compliments submitted about or by users
+    // handleUserFeedback: (req, res) => {
+    //     // Authenticate user
+    //     // Log feedback in the system
+    //     // Notify involved parties or manager for further action
+    //     // Update necessary user fields based on feedback outcome
+    // },
+
+
+       // manageUserDeposit: async (req, res) => {
+    //     const { amount } = req.body;
+    //     const userId = req.user.userId;
+
+    //     if (!amount || amount <= 0) {
+    //         return res.status(400).json({ message: "Invalid deposit amount" });
+    //     }
+
+    //     try {
+    //         // Validate user exists
+    //         const user = await UserModel.findById(userId);
+    //         if (!user) {
+    //             return res.status(404).json({ message: "User not found" });
+    //         }
+
+    //         // Create a transaction record
+    //         const transaction = new TransactionModel({
+    //             user: userId,
+    //             type: 'deposit',
+    //             amount: amount
+    //         });
+    //         await transaction.save();
+            
+    //         user.spending += amount;  // Assuming 'spending' accumulates deposits
+    //         await user.save();
+
+    //         // Send success response
+    //         res.status(201).json({
+    //             message: "Deposit successful",
+    //             transactionId: transaction._id,
+    //             amount: transaction.amount,
+    //             type: transaction.type,
+    //             date: transaction.date
+    //         });
+    //     } catch (error) {
+    //         console.error("Error managing deposit:", error);
+    //         res.status(500).json({ message: "Failed to manage deposit", error: error.message });
+    //     }
+    // }

@@ -1,13 +1,10 @@
+const UserModel = require('../models/userModel');
+const OrderModel = require('../models/orderModel');
+const MenuModel = require('../models/menuModel');
 const FeedbackModel = require('../models/feedbackModel');
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-/*
-    Essentials:
-                - submitFeedback
-                - listFeedback
-                - getFeedbackDetails
-*/
 
 const feedbackController = {
     
@@ -19,6 +16,14 @@ const feedbackController = {
         // Update related user or dish ratings if applicable
         // Notify involved parties (such as the chef or delivery person)
         // Return success response with feedback details
+    },
+
+    rateMenuItem: (req, res) => {
+        // Validate rating input
+        // Check if the customer is authorized to rate the item
+        // Update or add a new rating for the menu item
+        // Recalculate the average rating for the menu item
+        // Return success response with new rating details
     },
 
     // Respond to feedback as a manager or user involved
