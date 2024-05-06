@@ -2,11 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const orderSchema = new Schema({
+    orderId: { type: Number, unique: true, required: true },
     customer: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    chefUsername: { type: String, required: true, unique: true },
-    deliveryUsername: { type: String, unique: true },
+    chefUsername: { type: String, required: true },
+    deliveryUsername: { type: String },
     dishes: [{
-        dish: { type: Schema.Types.ObjectId, ref: 'Menu', required: true },
+        dishName: { type: String, required: true },
         quantity: { type: Number, required: true, min: 1 }
     }],
     total_price: { type: Number, required: true },
