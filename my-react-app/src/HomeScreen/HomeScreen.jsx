@@ -32,5 +32,4 @@ function HomeScreen() {
 
     );
 }
-//lol
 export default HomeScreen;
