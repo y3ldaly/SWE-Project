@@ -1,14 +1,12 @@
+import './ChefRegisterPage.css'
 
-import React from 'react'
-import './LoginSignup.css'
-
-import user_icon from '../Assets/person.png'
-import password_icon from '../Assets/password.png'
-import restaurant_icon from '../Assets/restaurant.png'
-import address_icon from '../Assets/address.png'
+import user_icon from '../../assets/person.png'
+import password_icon from '../../assets/password.png'
+import restaurant_icon from '../../assets/restaurant.png'
+import address_icon from '../../assets/address.png'
 
 
-const LoginSignup = () => {
+function ChefRegisterPage() {
     return (
         <div className='container'>
             <div className="header">
@@ -47,4 +45,4 @@ const LoginSignup = () => {
         </div>
     )
 }
-export default LoginSignup
+export default ChefRegisterPage

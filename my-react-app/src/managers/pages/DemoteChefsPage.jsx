@@ -1,5 +1,5 @@
-import DemoteButton from "../../components/DemoteButton"
-import ManagerNavbar from "../../components/ManagerNavbar"
+import DemoteButton from "../components/DemoteButton"
+import ManagerNavbar from "../components/ManagerNavbar"
 
 let buttonName = "DEMOTE"
 

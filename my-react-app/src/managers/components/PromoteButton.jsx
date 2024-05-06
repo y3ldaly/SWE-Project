@@ -1,11 +1,11 @@
-import './PromoteButton.css';
-import chefProfile from '../assets/chef-profile-pic.png';
-import DishButton from '../../users/registered/components/DishButton';
+import './PromoteButton.css'
+import chefProfile from '../assets/chef-profile-pic.png'
+import DishButton from '../../users/registered/components/DishButton'
 
 function PromoteButton(props) {
     // Assuming props.dishCount is the number of DishButtons to render
     const dishButtons = Array.from({ length: props.dishCount }, (_, index) => (
-        <DishButton key={index} />
+        <DishButton title="Hello" key={index} />
     ));
 
     return (

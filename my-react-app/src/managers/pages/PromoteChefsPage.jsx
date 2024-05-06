@@ -1,5 +1,5 @@
-import PromoteButton from "../../components/PromoteButton"
-import ManagerNavbar from "../../components/ManagerNavbar"
+import PromoteButton from "../components/PromoteButton"
+import ManagerNavbar from "../components/ManagerNavbar"
 
 let buttonName = "PROMOTE"
 

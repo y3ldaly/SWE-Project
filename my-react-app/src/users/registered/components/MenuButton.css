@@ -38,7 +38,7 @@
 .button-image {
     max-width: 30%;
     height: auto;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     /* border-radius: 50%; */
 
     max-width: 60%; /* Ensure the image does not exceed the button width */

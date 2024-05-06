@@ -1,6 +1,7 @@
-import './HomeScreen.css'
+import '../pages/homeScreen/UserHomeScreen.css'
 
-function FoodCard(props) {
+
+function HomeScreenCard(props) {
     return(
         <div class="card">
             <img src={props.img} alt={props.altText}/>
@@ -15,4 +16,4 @@ function FoodCard(props) {
     )
 }
 
-export default FoodCard
+export default HomeScreenCard
