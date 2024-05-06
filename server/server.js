@@ -6,11 +6,9 @@ const errorMiddleware = require('./middleware/errorMiddleware');
 dotenv.config();
 
 const userRoutes = require('./routes/userRoutes');
+const transactionRoutes = require('./routes/transactionRoutes');
 const menuRoutes = require('./routes/menuRoutes');
-// const transactionRoutes = require('./routes/transactionRoutes');
-// const orderRoutes = require('./routes/orderRoutes');
-// const menuRoutes = require('./routes/menuRoutes');
-// const feedbackRoutes = require('./routes/feedbackRoutes');
+const feedbackRoutes = require('./routes/feedbackRoutes');
 
 // Connect to MongoDB
 connectDB();
@@ -23,10 +21,9 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/users', userRoutes);
-// app.use('/api/transactions', transactionRoutes);
-// app.use('/api/orders', orderRoutes);
+app.use('/api/transactions', transactionRoutes);
 app.use('/api/menu', menuRoutes);
-// app.use('/api/feedback', feedbackRoutes);
+app.use('/api/feedback', feedbackRoutes);
 
 app.use(errorMiddleware.notFound);
 app.use(errorMiddleware.errorHandler);

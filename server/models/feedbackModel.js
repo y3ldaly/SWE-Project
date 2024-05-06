@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const feedbackSchema = new Schema({
     fromUser: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    toUser: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    toUser: { type: String, required: true },
     relatedDish: { type: Schema.Types.ObjectId, ref: 'Menu' },  // Optional, for feedback related to specific dishes
     type: {
         type: String,
@@ -13,7 +13,7 @@ const feedbackSchema = new Schema({
     subject: {
         type: String,
         required: true,
-        enum: ['food', 'delivery']  // Broad categories to encompass all possible feedback scenarios
+        enum: ['food', 'delivery', 'import']  // Broad categories to encompass all possible feedback scenarios
     },
     description: { type: String, required: true },
     status: {

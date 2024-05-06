@@ -30,10 +30,4 @@ router.get('/',
 router.get('/:dishName',
   menuController.getMenuItemDetails);
 
-// Rate a menu item (only accessible by customers)
-router.post('/:dishId/rate',
-  authMiddleware,
-  roleMiddleware(['customer', 'vip']),
-  menuController.rateMenuItem);
-
 module.exports = router;
