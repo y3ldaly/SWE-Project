@@ -8,7 +8,6 @@ import Nihari from './Nihari.png'
 function HomeScreen() {
     return (
         <div>
-            
             <h1>HIFRY HALAL</h1>
             <nav className="navbar">
                 <ul>
@@ -27,6 +26,7 @@ function HomeScreen() {
             <FoodCard img={Shawarma} title="Shawarma" caption="Your caption here" price="$9.99"/>
             <FoodCard img={ChickenBiryani} title="Chicken Biryani" caption="Your caption here" price="$9.99"/>
             <FoodCard img={Nihari} title="Nihari" caption="Your caption here" price="$9.99"/>
+
             </div>
         </div>
 

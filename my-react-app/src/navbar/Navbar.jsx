@@ -13,8 +13,8 @@ function Navbar() {
                     <li><a href="#" id="order" class="navButton">Order</a></li>
                     <li><a href="#" id="review" class="navButton">Review</a></li>
                 </ul>
-                {/* <div class="profile-container">
-                    <img src="profile-pic.png" alt="Profile Picture" class="profile-pic" id="profile-pic"/>
+                <div class="profile-container">
+                    <img src="person.png" alt="Profile Picture" class="profile-pic" id="profile-pic"/>
                     <div class="dropdown-menu" id="dropdown-menu">
                         <ul>
                             <li class="menu">View Profile</li>
@@ -22,7 +22,7 @@ function Navbar() {
                             <li class="menu">Log Out</li>
                         </ul>
                     </div>
-                </div> */}
+                </div>
             </nav>
         </>
     )

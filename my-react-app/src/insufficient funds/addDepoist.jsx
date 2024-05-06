@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import './AddDeposit.css';  // Make sure the CSS file path is correct
+import WarningMessage from './WarningNotEnough'
 
 function AddDeposit() {
+
     const [amount, setAmount] = useState('');
 
     const handleAmountChange = (e) => {
@@ -15,12 +17,16 @@ function AddDeposit() {
     };
 
     return (
+        
         <div className="add-deposit-container">
+
             <h2>Add Deposit</h2>
             <div className="balance-info">
                 <div className="balance-item">You currently have: $20.00</div>
                 <div className="balance-item">Your order: $29.99</div>
             </div>
+            <WarningMessage message=" Not Enough Money" />
+
             <form onSubmit={handleSubmit} className="deposit-form">
                 <label htmlFor="amount">Enter amount to deposit:</label>
                 <input

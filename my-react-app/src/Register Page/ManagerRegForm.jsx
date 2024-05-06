@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.css';  // Ensure the path to your CSS file is correct
+import './style.css';  
 
 function ManagerRegistrationForm() {
   return (

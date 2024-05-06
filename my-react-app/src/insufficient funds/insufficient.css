@@ -88,3 +88,14 @@ h2 {
   width: 100%; /* Ensure it spans the full width */
   font-family: 'Arial', sans-serif; /* Example font, adjust as needed */
 }
+
+
+.warning-message {
+  position: fixed;   /* Fixed positioning relative to the viewport */
+  top: 0;            /* Aligns the top edge of the element with the top of the viewport */
+  left: 0;           /* Aligns the left edge of the element with the left of the viewport */
+  background-color: red; /* Background color for visibility */
+  color: red;      /* Text color */
+  padding: 10px;     /* Some padding around the text */
+  z-index: 1000;     /* Ensures it stays on top of other content */
+}
