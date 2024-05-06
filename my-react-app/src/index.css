@@ -1,4 +1,11 @@
 /* global styles */
+@import url('https://fonts.googleapis.com/css2?family=Sedan+SC&display=swap');
+
+h1 {
+    font-family: 'Sedan SC', sans-serif;
+    font-size: 50px;
+    font-weight: bold;
+}
 
 body {
     background-color: skyblue;
@@ -8,11 +15,11 @@ body {
     background-position: center;
     background-size: cover;
     margin: 10px;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 #order-prompt {
     text-align: center;
     font-weight: bold;
     font-size: 24px;
-}
+} 

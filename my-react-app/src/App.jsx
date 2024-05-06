@@ -15,26 +15,12 @@
 // import AddDeposit from './insufficient funds/addDepoist'
 // import Complaints from "./Complaints/Urgent"
 import Important from './Complaints/Important'
+// use this file to make sure your components work
 
 function App() {
-    return(
-        <>
-            {/* <Appetizers /> */}
-            {/* <Order/> */}
-            {/* <MainDishes /> */}
-            {/* <SignatureDishes /> */}
-            {/* <FullMenu/> */}
-            {/* <PaymentPage/> */}
-            {/* {<LoginForm/>} */}
-            {/* {<CustomerRegistrationForm/>} */}
-            {/* {<ManagerRegistrationForm/>} */}
-            {/* {<InsufficientFunds/>} */}
-            {/* {<AddDeposit/>} */}
-            {<Important/>}
+    return ( 
+          <Important/>
 
-
-
-        </>
     )
 }
 

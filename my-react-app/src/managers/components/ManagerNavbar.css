@@ -1,0 +1,23 @@
+body {
+    margin: 0px;
+}
+
+.manager-navbar {
+    background-color: tomato;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.manager-navbar .title {
+    margin: 0;
+    flex: 1;
+    text-align: center;
+}
+
+.manager-navbar .profile-pic {
+    width: 40px;
+    margin-left: auto;
+    cursor: pointer;
+}
