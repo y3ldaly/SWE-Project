@@ -1,15 +1,11 @@
+const UserModel = require('../models/userModel');
+const TransactionModel = require('../models/transactionModel');
+const OrderModel = require('../models/orderModel');
 const MenuModel = require('../models/menuModel');
-const jwt = require('jsonwebtoken');
+const FeedbackModel = require('../models/feedbackModel');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-/*
-    Essentials:
-                - createMenuItem
-                - updateMenuItem
-                - deleteMenuItem
-                - listMenuItems
-                - getMenuItemDetails
-*/
 
 const menuController = {
     
@@ -128,21 +124,25 @@ const menuController = {
         } catch (error) {
             res.status(500).json({ message: "Error retrieving the menu item", error: error.message });
         }
-    },
+    }
 
         // Fetch the specific menu item from the database using its ID
         // Include detailed information like descriptions, ratings, and reviews
         // Return the menu item details
-    
-
-    // Handle ratings for a menu item by customers
-    rateMenuItem: (req, res) => {
-        // Validate rating input
-        // Check if the customer is authorized to rate the item
-        // Update or add a new rating for the menu item
-        // Recalculate the average rating for the menu item
-        // Return success response with new rating details
-    }
 };
 
 module.exports = menuController;
+
+
+
+
+
+
+
+
+
+
+
+
+
+

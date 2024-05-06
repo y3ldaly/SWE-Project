@@ -1,24 +1,79 @@
+const UserModel = require('../models/userModel');
+const TransactionModel = require('../models/transactionModel');
+const OrderModel = require('../models/orderModel');
+const MenuModel = require('../models/menuModel');
 const FeedbackModel = require('../models/feedbackModel');
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-/*
-    Essentials:
-                - submitFeedback
-                - listFeedback
-                - getFeedbackDetails
-*/
 
 const feedbackController = {
     
-    // Submit new feedback (complaint or compliment)
-    submitFeedback: (req, res) => {
-        // Validate feedback data from req.body
-        // Ensure user is authenticated and authorized to submit feedback
-        // Save feedback to database
-        // Update related user or dish ratings if applicable
-        // Notify involved parties (such as the chef or delivery person)
-        // Return success response with feedback details
+    submitFeedback: async (req, res) => {
+    const { orderId } = req.params;
+    const { feedbackType, subject, description, targetRole } = req.body;
+
+    // Validate input
+    if (!description || !feedbackType || !subject || !targetRole) {
+        return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    try {
+        const order = await OrderModel.findById(orderId);
+        if (!order) {
+            return res.status(404).json({ message: "Order not found" });
+        }
+
+        // Determine target user based on the role
+        let targetUsername;
+        if (targetRole === 'chef') {
+            targetUsername = order.chefUsername;
+        } else if (targetRole === 'delivery') {
+            targetUsername = order.deliveryUsername;
+        } else {
+            return res.status(400).json({ message: "Invalid target role" });
+        }
+
+        // Fetch the user details of the person receiving the feedback
+        const targetUser = await UserModel.findOne({ username: targetUsername });
+        if (!targetUser) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Increment complaints or compliments count
+        if (feedbackType === 'complaint') {
+            targetUser.complaints += 1;
+        } else if (feedbackType === 'compliment') {
+            targetUser.compliments += 1;
+        }
+        await targetUser.save();
+
+        // Save feedback
+        const newFeedback = new FeedbackModel({
+            fromUser: req.user._id,
+            toUser: targetUser._id,
+            relatedDish: null,  // If you need to specify a dish, this needs to be handled
+            type: feedbackType,
+            subject,
+            description,
+            status: 'open'
+        });
+        await newFeedback.save();
+
+        res.status(201).json({ message: "Feedback submitted successfully", feedback: newFeedback });
+    } catch (error) {
+        console.error("Error submitting feedback:", error);
+        res.status(500).json({ message: "Error submitting feedback", error: error.message });
+    }
+},
+
+
+    rateMenuItem: (req, res) => {
+        // Validate rating input
+        // Check if the customer is authorized to rate the item
+        // Update or add a new rating for the menu item
+        // Recalculate the average rating for the menu item
+        // Return success response with new rating details
     },
 
     // Respond to feedback as a manager or user involved
