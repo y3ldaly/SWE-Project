@@ -13,7 +13,7 @@ const feedbackSchema = new Schema({
     subject: {
         type: String,
         required: true,
-        enum: ['food', 'delivery', 'import',]  // Broad categories to encompass all possible feedback scenarios
+        enum: ['food', 'delivery', 'food quality', 'fraud']  // Broad categories to encompass all possible feedback scenarios
     },
     description: { type: String, required: true },
     status: {

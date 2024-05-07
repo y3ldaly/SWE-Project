@@ -1,5 +1,4 @@
 const UserModel = require('../models/userModel');
-const TransactionModel = require('../models/transactionModel');
 const OrderModel = require('../models/orderModel');
 const MenuModel = require('../models/menuModel');
 const FeedbackModel = require('../models/feedbackModel');
@@ -102,7 +101,7 @@ const userController = {
           }
     },
     
-    updateUserProfile: async (req, res) => {
+    updateOwnProfile: async (req, res) => {
         const { firstName, lastName, username, email, password } = req.body;
         const userId = req.user.userId;  // Extracted from JWT
     
@@ -145,43 +144,6 @@ const userController = {
         } catch (error) {
             res.status(500).json({ message: "Failed to update user profile", error: error.message });
         }
-    },
-    
-    // Activates or deactivates a user account
-    toggleUserActiveStatus: (req, res) => {
-        // Check manager authorization
-        // Update user's active status in the database
-        // Send success or error response
-    },
-
-    // Manages user warnings
-    manageWarnings: (req, res) => {
-        // Authenticate and authorize managerial role
-        // Modify warnings count based on behavior or admin action
-        // Update user status if warnings exceed limits
-        // Send updated response
-    },
-
-    // Upgrades a customer to VIP status or downgrades
-    manageVIPStatus: (req, res) => {
-        // Check user spending or order count
-        // Update VIP status in database
-        // Send success or error response
-    },
-
-    // Lists users based on criteria (role, status, etc.)
-    listUsers: (req, res) => {
-        // Authenticate and authorize managerial access
-        // Fetch users from database based on criteria
-        // Send list of users
-    },
-
-    // Resolves disputes concerning user complaints
-    resolveDisputes: (req, res) => {
-        // Authenticate and authorize managerial role
-        // Decide on the dispute resolution
-        // Update database based on resolution
-        // Inform all parties involved
     },
 
     // Closes a user account

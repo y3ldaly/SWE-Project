@@ -11,7 +11,6 @@ const menuSchema = new Schema({
   ratings: [{
     customerId: { type: Schema.Types.ObjectId, ref: 'User' },
     score: { type: Number, required: true },
-    comment: { type: String }
   }],
   averageRating: { type: Number, default: 0 }
 });
