@@ -7,9 +7,7 @@ dotenv.config();
 
 const userRoutes = require('./routes/userRoutes');
 const menuRoutes = require('./routes/menuRoutes');
-// const transactionRoutes = require('./routes/transactionRoutes');
-// const orderRoutes = require('./routes/orderRoutes');
-// const menuRoutes = require('./routes/menuRoutes');
+const orderRoutes = require('./routes/orderRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
 
 // Connect to MongoDB
@@ -23,8 +21,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/users', userRoutes);
-// app.use('/api/transactions', transactionRoutes);
-// app.use('/api/orders', orderRoutes);
+app.use('/api/orders', orderRoutes);
 app.use('/api/menu', menuRoutes);
 app.use('/api/feedback', feedbackRoutes);
 

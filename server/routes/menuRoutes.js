@@ -3,6 +3,7 @@ const router = express.Router();
 const menuController = require('../controllers/menuController');
 const authMiddleware = require('../middleware/authMiddleware');
 const roleMiddleware = require('../middleware/roleMiddleware');
+const errorMiddleware = require('../middleware/errorMiddleware');
 
 // Create a new menu item (only accessible by chefs)
 router.post('/',
