@@ -145,74 +145,38 @@ const userController = {
             res.status(500).json({ message: "Failed to update user profile", error: error.message });
         }
     },
+  
+  makeDeposit: async (req, res) => {
+          const { amount } = req.body;
+          const userId = req.user.userId;
 
-    makeDeposit: async (req, res) => {
-        const { amount } = req.body;
-        const userId = req.user.userId;
+          if (!amount || amount <= 0) {
+              return res.status(400).json({ message: "Invalid deposit amount" });
+          }
 
-        if (!amount || amount <= 0) {
-            return res.status(400).json({ message: "Invalid deposit amount" });
-        }
+          try {
+              // Validate user exists
+              const user = await UserModel.findById(userId);
+              if (!user) {
+                  return res.status(404).json({ message: "User not found" });
+              }
 
-        try {
-            // Validate user exists
-            const user = await UserModel.findById(userId);
-            if (!user) {
-                return res.status(404).json({ message: "User not found" });
-            }
-            
-            user.balance += amount;
-            await user.save();
+              user.balance += amount;
+              await user.save();
 
-            // Send success response
-            res.status(200).json({
-                message: "Deposit successful",
-                amount,
-                balance: user.balance
-            });
-        } catch (error) {
-            console.error("Error managing deposit:", error);
-            res.status(500).json({ message: "Failed to manage deposit", error: error.message });
-        }
-    },
-    
-    // Activates or deactivates a user account
-    toggleUserActiveStatus: (req, res) => {
-        // Check manager authorization
-        // Update user's active status in the database
-        // Send success or error response
-    },
-
-    // Manages user warnings
-    manageWarnings: (req, res) => {
-        // Authenticate and authorize managerial role
-        // Modify warnings count based on behavior or admin action
-        // Update user status if warnings exceed limits
-        // Send updated response
-    },
-
-    // Upgrades a customer to VIP status or downgrades
-    manageVIPStatus: (req, res) => {
-        // Check user spending or order count
-        // Update VIP status in database
-        // Send success or error response
-    },
-
-    // Lists users based on criteria (role, status, etc.)
-    listUsers: (req, res) => {
-        // Authenticate and authorize managerial access
-        // Fetch users from database based on criteria
-        // Send list of users
-    },
-
-    // Resolves disputes concerning user complaints
-    resolveDisputes: (req, res) => {
-        // Authenticate and authorize managerial role
-        // Decide on the dispute resolution
-        // Update database based on resolution
-        // Inform all parties involved
-    },
-
+              // Send success response
+              res.status(200).json({
+                  message: "Deposit successful",
+                  amount,
+                  balance: user.balance
+              });
+          } catch (error) {
+              console.error("Error managing deposit:", error);
+              res.status(500).json({ message: "Failed to manage deposit", error: error.message });
+          }
+      },
+  
+  
     // Closes a user account
     closeUserAccount: (req, res) => {
         // Authenticate and check authorization
@@ -236,11 +200,3 @@ module.exports = userController;
 
 
 
-
-  // Handles complaints or compliments submitted about or by users
-    // handleUserFeedback: (req, res) => {
-    //     // Authenticate user
-    //     // Log feedback in the system
-    //     // Notify involved parties or manager for further action
-    //     // Update necessary user fields based on feedback outcome
-    // },

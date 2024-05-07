@@ -23,9 +23,9 @@ const menuController = {
 
     // Check if the chef is authorized to add menu items
     // This assumes authentication middleware sets req.user
-    if (req.user.role !== 'chef') {
-        return res.status(403).json({ message: "Unauthorized" });
-    }
+    // if (req.user.role !== 'chef') {
+    //     return res.status(403).json({ message: "Unauthorized" });
+    // }
 
     // Check for duplicate dish names
     const existingDish = await MenuModel.findOne({ dishName });
