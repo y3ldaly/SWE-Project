@@ -20,5 +20,3 @@ const notFound = (req, res, next) => {
     errorHandler
   };
   
-
-  

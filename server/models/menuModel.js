@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const menuSchema = new Schema({
+  //chefId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   dishName: { type: String, required: true, unique: true },
   description: { type: String, required: true },
   price: { type: Number, required: true },
@@ -10,7 +11,6 @@ const menuSchema = new Schema({
   ratings: [{
     customerId: { type: Schema.Types.ObjectId, ref: 'User' },
     score: { type: Number, required: true },
-    comment: { type: String }
   }],
   averageRating: { type: Number, default: 0 }
 });

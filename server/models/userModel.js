@@ -7,7 +7,7 @@ const userSchema = new Schema({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  role: { 
+  role: {
     type: String, 
     required: true, 
     enum: ['chef', 'delivery', 'importer', 'manager', 'customer', 'surfer']
@@ -16,6 +16,12 @@ const userSchema = new Schema({
   warnings: { type: Number, default: 0 },
   compliments: { type: Number, default: 0 },
   complaints: { type: Number, default: 0 },
+  app_complaints: { type: Number, default: 0 },
+  app_compliments: { type: Number, default: 0 },
+  ratings: [{
+    customerId: { type: Schema.Types.ObjectId, ref: 'User' },
+    score: { type: Number, required: true },
+  }],
   salary: { type: Number, default: 0 },
   balance: { type: Number, default: 0 },
   ordersCount: { type: Number, default: 0 },

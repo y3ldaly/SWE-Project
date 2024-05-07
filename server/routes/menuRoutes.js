@@ -31,4 +31,7 @@ router.get('/',
 router.get('/:dishName',
   menuController.getMenuItemDetails);
 
+
+// Rate a menu item (only accessible by customers)
+
 module.exports = router;
