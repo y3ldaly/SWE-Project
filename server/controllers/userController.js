@@ -7,21 +7,29 @@ const jwt = require('jsonwebtoken');
 
 
 const userController = {
-    
+
     registerUser: async (req, res) => {
         const { firstName, lastName, username, email, password, role } = req.body;
-
+    
         try {
             // Check if user already exists by username or email
             const existingUser = await UserModel.findOne({ $or: [{ username }, { email }] });
             if (existingUser) {
                 return res.status(409).json({ message: "User already exists with the same username or email" });
             }
-
+    
             // Hash the password
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(password, salt);
-
+    
+            // Set hourly rate based on role
+            let hourlyRate = 0;
+            if (role === "chef") {
+                hourlyRate = 25;
+            } else if (role === "delivery" || role == "importer") {
+                hourlyRate = 20;
+            }
+    
             // Create a new user object
             const newUser = new UserModel({
                 firstName,
@@ -30,25 +38,19 @@ const userController = {
                 email,
                 password: hashedPassword,
                 role,
-                status: 'active',
-                warnings: 0,
-                compliments: 0,
-                complaints: 0,
-                balance: 0,
-                ordersCount: 0,
-                isVIP: false
+                hourlyRate
             });
-
+    
             // Save the new user
             const savedUser = await newUser.save();
-
+    
             // Create a token for the new user with a 24-hour expiration
             const token = jwt.sign(
                 { userId: savedUser._id, username: savedUser.username, role: savedUser.role },
                 process.env.JWT_SECRET,
-                { expiresIn: '24h' }  // Set expiration to 24 hours
+                { expiresIn: '24h' } 
             );
-
+    
             // Send confirmation response with token and user details
             res.status(201).json({
                 message: "User registered successfully",
@@ -56,7 +58,8 @@ const userController = {
                 userId: savedUser._id,
                 username: savedUser.username,
                 email: savedUser.email,
-                role: savedUser.role
+                role: savedUser.role,
+                hourlyRate
             });
         } catch (error) {
             res.status(500).json({ message: "Error registering user", error: error.message });
@@ -68,9 +71,14 @@ const userController = {
 
         try {
             // Find user by username or email
-            const user = await UserModel.findOne({ $or: [{ username }, { email: username }] });
+            const user = await UserModel.findOne({
+                $or: [{ username }, { email: username }],
+                status: 'active'  // Ensure user status is 'active'
+            });
+
+            // Validate user existence and status
             if (!user) {
-                return res.status(401).json({ message: "Invalid username or email" });
+                return res.status(401).json({ message: "Invalid username or email, or user is not active." });
             }
 
             // Check if the provided password matches the stored hashed password
@@ -98,7 +106,7 @@ const userController = {
 
         } catch (error) {
             res.status(500).json({ message: "Error logging in user", error: error.message });
-          }
+        }
     },
     
     updateOwnProfile: async (req, res) => {
@@ -146,57 +154,85 @@ const userController = {
         }
     },
   
-  makeDeposit: async (req, res) => {
-          const { amount } = req.body;
-          const userId = req.user.userId;
+    closeAccount: async (req, res) => {
+        const userId = req.user.userId; 
 
-          if (!amount || amount <= 0) {
-              return res.status(400).json({ message: "Invalid deposit amount" });
-          }
+        try {
+            // Find the user by their ID
+            const user = await UserModel.findById(userId);
+            if (!user) {
+                return res.status(404).json({ message: "User not found" });
+            }
 
-          try {
-              // Validate user exists
-              const user = await UserModel.findById(userId);
-              if (!user) {
-                  return res.status(404).json({ message: "User not found" });
-              }
+            // Check if the user is already deactivated
+            if (user.status === 'deactivated') {
+                return res.status(400).json({ message: "Account already deactivated" });
+            }
 
-              user.balance += amount;
-              await user.save();
+            // Update the user's status to 'deactivated'
+            user.status = 'deactivated';
 
-              // Send success response
-              res.status(200).json({
-                  message: "Deposit successful",
-                  amount,
-                  balance: user.balance
-              });
-          } catch (error) {
-              console.error("Error managing deposit:", error);
-              res.status(500).json({ message: "Failed to manage deposit", error: error.message });
-          }
-      },
-  
-  
-    // Closes a user account
-    closeUserAccount: (req, res) => {
-        // Authenticate and check authorization
-        // Remove user data from database or mark as closed
-        // Handle any account balance or open orders
-        // Send closure confirmation
+            // Save the updated user information
+            await user.save();
+
+            // Send a response back that the account has been deactivated
+            res.json({ message: "Account has been successfully deactivated" });
+        } catch (error) {
+            res.status(500).json({ message: "Error deactivating account", error: error.message });
+        }
+    },
+
+    getUserDetails: async (req, res) => {
+        const userId = req.user.userId;
+
+        try {
+            const user = await UserModel.findById(userId);
+            if (!user) {
+                return res.status(404).json({ message: "User not found." });
+            }
+
+            // Initialize the response object
+            let userDetails = {
+                firstName: user.firstName,
+                lastName: user.lastName,
+                username: user.username,
+                email: user.email,
+                role: user.role,
+                status: user.status
+            };
+
+            // Append additional details based on the role
+            switch (user.role) {
+                case 'customer':
+                case 'VIP':
+                    userDetails = {
+                        ...userDetails,
+                        balance: user.balance,
+                        moneySpent: user.moneySpent,
+                        orderCount: user.orderCount
+                    };
+                    break;
+                case 'chef':
+                case 'importer':
+                case 'delivery':
+                    userDetails = {
+                        ...userDetails,
+                        hourlyRate: user.hourlyRate
+                    };
+                    break;
+                case 'manager':
+                    // Only the base details are added for managers, which are already in userDetails
+                    break;
+                default:
+                    return res.status(403).json({ message: "Unauthorized access to user details" });
+            }
+
+            res.json({ message: "User details retrieved successfully", userDetails });
+        } catch (error) {
+            res.status(500).json({ message: "Error retrieving user details", error: error.message });
+        }
     }
 
 };
 
 module.exports = userController;
-
-
-
-
-
-
-
-
-
-
-
-
