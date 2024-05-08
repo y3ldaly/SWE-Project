@@ -2,6 +2,7 @@ const UserModel = require('../models/userModel');
 const OrderModel = require('../models/orderModel');
 const MenuModel = require('../models/menuModel');
 const FeedbackModel = require('../models/feedbackModel');
+const ForumModel = require('../models/forumModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -207,31 +208,209 @@ const feedbackController = {
     },
     
 
-    // Respond to feedback as a manager or user involved
-    respondToFeedback: (req, res) => {
-        // Validate response data
-        // Check user authentication and authorization to respond
-        // Update the feedback record with the user's response
-        // Potentially adjust the user's status based on feedback resolution (warnings, demotions, etc.)
-        // Notify original feedback submitter of the response
-        // Return success response with updated feedback details
+
+
+    respondToFeedback: async (req, res) => {
+        const { feedbackId, action } = req.body;
+    
+        console.log(`Action received: ${action}`);
+    
+        try {
+            const feedback = await FeedbackModel.findById(feedbackId).populate('fromUser').populate('toUser');
+            if (!feedback) {
+                return res.status(404).json({ message: "Feedback not found" });
+            }
+    
+            console.log(`Feedback found: ${feedback._id}, Type: ${feedback.type}, Subject: ${feedback.subject}`);
+    
+            const targetUser = await UserModel.findById(feedback.toUser._id);
+            if (!targetUser) {
+                return res.status(404).json({ message: "Target user not found" });
+            }
+    
+            console.log(`Target User before changes: Compliments: ${targetUser.app_compliments}, Complaints: ${targetUser.app_complaints}`);
+    
+            if (action === 'approve') {
+                if (feedback.subject === 'food quality' || feedback.subject === 'fraud') {
+                    // Specific logic for complaints against importers
+                    if (feedback.subject === 'fraud') {
+                        targetUser.status = 'deactivated'; // Immediate dismissal for fraud
+                        feedback.resolution = 'dismissal';
+                        await UserModel.findByIdAndUpdate(targetUser._id, { status: 'deactivated' });
+                    } else if (feedback.subject === 'food quality') {
+                        targetUser.app_complaints += 1;
+                        if (targetUser.app_complaints >= 2) {
+                            targetUser.demotion_count += 1;
+                            targetUser.salary -= 1; // Demote the importer by reducing salary
+                            feedback.resolution = 'demotion';
+                            if (targetUser.demotion_count >= 2) {
+                                targetUser.status = 'deactivated'; // Dismiss if demoted twice
+                                feedback.resolution = 'dismissal';
+                                await UserModel.findByIdAndUpdate(targetUser._id, { status: 'deactivated' });
+                            }
+                        } else {
+                            feedback.resolution = 'warning';
+                        }
+                    }
+                    await targetUser.save();
+                } else {
+                    // Handle other types of feedback
+                    if (feedback.type === 'complaint') {
+                        if (targetUser.app_compliments > 0) {
+                            targetUser.app_compliments -= 1;
+                        } else {
+                            targetUser.app_complaints += 1;
+                        }
+    
+                        if (targetUser.app_complaints >= 2) {
+                            targetUser.demotion_count += 1;
+                            targetUser.salary -= 1;
+                            feedback.resolution = targetUser.demotion_count >= 2 ? 'dismissal' : 'demotion';
+                            if (feedback.resolution === 'dismissal') {
+                                await UserModel.findByIdAndUpdate(targetUser._id, { status: 'deactivated' });
+                            }
+                        } else {
+                            feedback.resolution = 'warning';
+                        }
+                    } else if (feedback.type === 'compliment') {
+                        if (targetUser.app_complaints > 0) {
+                            targetUser.app_complaints -= 1;
+                        } else {
+                            targetUser.app_compliments += 1;
+                        }
+    
+                        if (targetUser.app_compliments >= 2) {
+                            targetUser.promotion_count += 1;
+                            targetUser.salary += 1;
+                            feedback.resolution = 'bonus';
+                        } else {
+                            feedback.resolution = 'none';
+                        }
+                    }
+                    await targetUser.save();
+                }
+            } else if (action === 'deny') {
+                feedback.fromUser.warnings += 1;
+                if (feedback.fromUser.role === 'VIP' && feedback.fromUser.warnings >= 2) {
+                    feedback.fromUser.role = 'customer';
+                    feedback.fromUser.warnings = 0;
+                } else if (feedback.fromUser.warnings >= 2) {
+                    feedback.fromUser.status = 'deactivated';
+                    await UserModel.findByIdAndUpdate(feedback.fromUser._id, { status: 'deactivated' });
+                }
+                feedback.resolution = 'none';
+            }
+    
+            feedback.status = 'resolved';
+            await feedback.save();
+            await feedback.fromUser.save();
+    
+            res.status(200).json({ message: "Feedback response processed successfully", feedback });
+        } catch (error) {
+            console.error("Error responding to feedback:", error);
+            res.status(500).json({ message: "Error responding to feedback", error: error.message });
+        }
     },
+    
+    
+    
+    
+    
+
 
     // List feedback for a user or manager
-    listFeedback: (req, res) => {
-        // Authenticate and authorize user or manager
-        // Fetch all relevant feedback based on user role and filters (such as unresolved, recent, etc.)
-        // Return the list of feedback entries
+    listFeedback: async (req, res) => {
+        try {
+            // Only a manager can view all feedback
+            if (req.user.role !== 'manager') {
+                return res.status(403).json({ message: "Access denied. Only managers can access this resource." });
+            }
+    
+            const feedbacks = await FeedbackModel.find()
+                .populate('fromUser', 'username')  // Optional: Adjust the fields as necessary
+                .populate('toUser', 'username');  // Optional: Adjust the fields as necessary
+    
+            res.status(200).json(feedbacks);
+        } catch (error) {
+            console.error("Error listing feedback:", error);
+            res.status(500).json({ message: "Error retrieving feedback", error: error.message });
+        }
     },
 
+    forumCollector: async (req, res) => {
+        const { type, comment, parentId } = req.body;
+    
+        if (!type || !comment) {
+            return res.status(400).json({ message: "Type and comment are required fields." });
+        }
+    
+        try {
+            const user = await UserModel.findById(req.user.userId);
+            if (!user) {
+                return res.status(404).json({ message: "User not found" });
+            }
+    
+            // Create a new forum entry whether it's a post or a reply
+            const newForumEntry = new ForumModel({
+                username: user.username,
+                type,
+                comment
+            });
+    
+            if (type === 'reply' && parentId) {
+                // Find the parent post to link the reply
+                const parentPost = await ForumModel.findById(parentId);
+                if (!parentPost) {
+                    return res.status(404).json({ message: "Parent post not found" });
+                }
+    
+                // Save the new reply to the database first to get its ID
+                const savedReply = await newForumEntry.save();
+    
+                // Add the reply's ID to the parent post's replies array
+                parentPost.replies.push(savedReply._id);
+                await parentPost.save();
+    
+                return res.status(201).json({
+                    message: "Reply added successfully",
+                    reply: savedReply,
+                    parentPost
+                });
+            } else {
+                // Simply save the new post if it's not a reply
+                await newForumEntry.save();
+                res.status(201).json({
+                    message: "Forum entry added successfully",
+                    entry: newForumEntry
+                });
+            }
+        } catch (error) {
+            console.error("Error in forumCollector:", error);
+            res.status(500).json({ message: "Failed to add forum entry", error: error.message });
+        }
+    },
+    
 
-    // View specific feedback details
-    getAllComplaints: (req, res) => {
-        // Authenticate user
-        // Fetch the specific feedback from the database using the feedback ID
-        // Check if the user has permission to view this feedback
-        // Return feedback details
+    listForumPosts: async (req, res) => {
+        try {
+            // Fetch all posts that are of type 'post' and populate their replies
+            const posts = await ForumModel.find({ type: 'post' })
+                .populate({
+                    path: 'replies',
+                    match: { type: 'reply' },
+                    options: { sort: { postedAt: 1 } } // Sorting replies by postedAt
+                })
+                .sort({ postedAt: -1 }); // Sorting posts by postedAt in descending order
+            
+            if (!posts.length) {
+                return res.status(404).json({ message: "No discussion posts found" });
+            }
+
+            res.status(200).json(posts);
+        } catch (error) {
+            console.error("Error fetching forum posts:", error);
+            res.status(500).json({ message: "Error fetching discussion posts", error: error.message });
+        }
     }
 };
-
 module.exports = feedbackController;

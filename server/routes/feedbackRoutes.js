@@ -24,4 +24,12 @@ router.post('/chef/importer',
 
 router.post('/rateMenu', authMiddleware, roleMiddleware(['customer', 'VIP']), feedbackController.rateMenuItem);
 
+router.post('/respondToFeedback', authMiddleware, roleMiddleware(['manager']), feedbackController.respondToFeedback);
+
+router.get('/list-feedback', authMiddleware, roleMiddleware(['manager']), feedbackController.listFeedback);
+
+router.post('/forum', authMiddleware, feedbackController.forumCollector);
+
+router.get('/forum', authMiddleware, feedbackController.listForumPosts);
+
 module.exports = router;
