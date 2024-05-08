@@ -11,6 +11,8 @@ router.post('/login', userController.loginUser);
 
 router.post('/updateProfile', authMiddleware, userController.updateOwnProfile);
 
-router.post('/makeDeposit', authMiddleware, roleMiddleware(['customer']), userController.makeDeposit);
+router.put('/deactivate', authMiddleware, userController.closeAccount);
+
+router.get('/userDetails', authMiddleware, userController.getUserDetails);
 
 module.exports = router;
