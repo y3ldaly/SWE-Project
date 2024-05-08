@@ -4,18 +4,17 @@ const Schema = mongoose.Schema;
 const orderSchema = new Schema({
     orderId: { type: Number, unique: true, required: true },
     customer: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    chefUsername: { type: String, required: true },
+    chefUsername: { type: String },
     deliveryUsername: { type: String },
     dishes: [{
-        dishName: { type: String, required: true },  // Changed from dish ObjectId to dishName
+        dishName: { type: String, required: true }, 
         quantity: { type: Number, required: true, min: 1 }
     }],
     total_price: { type: Number, required: true },
     status: {
         type: String,
         required: true,
-        enum: ['in_progress', 'completed', 'canceled', 'frozen'],
-        default: 'in_progress'
+        enum: ['in_progress', 'completed', 'canceled']
     },
     order_type: {
         type: String,

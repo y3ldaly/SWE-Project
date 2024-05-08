@@ -22,12 +22,12 @@ const userSchema = new Schema({
   promotion_count: { type: Number, default: 0 },
   ratings: [{
     customerId: { type: Schema.Types.ObjectId, ref: 'User' },
-    score: { type: Number, required: false },
+    score: { type: Number },
   }],
-  salary: { type: Number, default: 21 },
+  hourlyRate: { type: Number, default: 0 },
   balance: { type: Number, default: 0 },
-  ordersCount: { type: Number, default: 0 },
-  isVIP: { type: Boolean, default: false }
+  moneySpent: { type: Number, default: 0 },
+  orderCount: { type: Number, default: 0 },
 });
 
 module.exports = mongoose.model('User', userSchema);
