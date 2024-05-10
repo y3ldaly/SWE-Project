@@ -19,13 +19,13 @@ h1 {
 
 body {
     /* background: linear-gradient(to top, #C0CAAD, #9DA9A0); */
-    background-color: aliceblue;
+    background-color: white;
     background-repeat: no-repeat;
     background-attachment: fixed; /*stretches background*/
     background-position: center;
     background-size: cover;
     font-family: 'Poppins', 'Trebuchet MS', 'Seguoe UI';
-    
+    margin: 0;
 }
 
 #order-prompt {

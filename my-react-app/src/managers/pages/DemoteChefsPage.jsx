@@ -1,5 +1,7 @@
 import DemoteButton from "../components/DemoteButton"
 import ManagerNavbar from "../components/ManagerNavbar"
+import ConfirmButton from "../../components/ConfirmButton"
+
 
 let buttonName = "DEMOTE"
 
@@ -12,6 +14,7 @@ function DemoteChefsPage() {
             <DemoteButton chefName="Chef Name" dishCount={3} buttonName={buttonName} />
             <DemoteButton chefName="Chef Name" dishCount={3} buttonName={buttonName} />
             <DemoteButton chefName="Chef Name" dishCount={3} buttonName={buttonName} />
+            <ConfirmButton/>
         </>
     )
 }

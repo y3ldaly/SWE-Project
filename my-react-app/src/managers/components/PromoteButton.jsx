@@ -1,29 +1,33 @@
-import './PromoteButton.css'
-import chefProfile from '../assets/chef-profile-pic.png'
-import DishButton from '../../users/registered/components/DishButton'
+// import React from 'react';
+// import { useHistory } from 'react-router-dom';
+import React from 'react';
+import './PromoteButton.css';
 
-function PromoteButton(props) {
-    // Assuming props.dishCount is the number of DishButtons to render
-    const dishButtons = Array.from({ length: props.dishCount }, (_, index) => (
-        <DishButton title="Hello" key={index} />
-    ));
-
+function PromoteButton({ onClick }) {
     return (
-        <div id="pdbutton-container">
-            <div id="button">
-                <div id="title-container">
-                    <img id="chef-pic" src={chefProfile} alt="" />
-                    <p id="chef-name">{props.chefName}</p>
-                </div>
-                <p id="message"><strong>{props.dishCount}</strong> dishes with 4+ stars</p>
-                <div className="chef-meals">{dishButtons}</div>
-                <div className="pdButton-container">
-                    <p id="promoteButton">{props.buttonName}</p>
-                </div>
-            </div>
+        <div class="promote-button-container">
+            <button className="promote-button" onClick={onClick}>
+                Promote
+            </button>
         </div>
-       
     );
-}
+  }  
+
+// function PromoteButton(props) {
+//   const history = useHistory();
+
+//   const handlePromote = () => {
+//     // Redirect to the specified link
+//     history.push(props.link);
+//   };
+
+//   return (
+    // <button className="promote-button" onClick={handlePromote}>
+    //   Promote
+    // </button>
+
+//     <button>Promote</button>
+//   );
+// }
 
 export default PromoteButton;

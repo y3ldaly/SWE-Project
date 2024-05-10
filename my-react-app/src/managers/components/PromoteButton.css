@@ -1,66 +1,33 @@
-#pdbutton-container {
-    display: inline-block;
-    background-color: rgb(254, 248, 248);
-    width: 500px;
-    /* Remove fixed height */
-    /* height: auto; */
-    border: 1px solid rgb(254, 248, 248);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-    border-radius: 10px;
-    margin: 50px;
-    /* Adjust overflow to ensure content does not overflow */
-    overflow: auto;
-}
-
-
-#pdbutton-container #title-container {
-    background-color: tomato;
+.button-container {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    border-radius: 10px;
-}
-
-#chef-pic {
-    width: 40px;
-    height: 40px;
-    margin: 10px 0px 10px 0px;
-}
-
-#chef-name {
-    display: inline;
-    /* margin-left: 10px; */
-    font-size: 20px;
-    font-weight: bold;
-}
-
-#num-dishes {
-    font-weight: bold;
-}
-
-#pdbutton-container #message {
-    text-align: center;
-}
-
-#chef-meals {
-    display: flex;
-    justify-content: center;
-    margin: 0px;
-}
-
-#promoteButton {
-    background-color: green;
+    align-items: center;
+    height: 100vh; /* Adjust height if needed */
+  }
+  
+  .promote-button {
+    background-color: #4CAF50; /* Green */
+    border: none;
     color: white;
-    display: inline;
-    margin-bottom: 10px;
-    padding: 5px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
     cursor: pointer;
-    max-width: 15%;
-    /* margin-top: 10px; */
-}
+    border-radius: 8px;
+  }
+  
+  .promote-button:hover {
+    background-color: #45a049;
+  }
+  
+  .promote-button:active {
+    background-color: #3e8e41;
+  }
 
-.pdButton-container {
+  .promote-button-container {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    margin-top: 10px; /* Add margin to separate from other elements */
+    justify-content: center;
+    margin: 10px 0px 20px 0px;
   }

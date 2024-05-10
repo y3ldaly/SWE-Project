@@ -35,6 +35,7 @@ function UserViewComplaintsPage() {
                     onReport={handleReport}
                     buttonTitle="Dispute"
                 />
+                
             </div>
         </>
         

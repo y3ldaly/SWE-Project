@@ -1,0 +1,17 @@
+.dish-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+  }
+  
+  .dish-card h3 {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  .dish-card p {
+    margin: 5px 0;
+  }
+  
