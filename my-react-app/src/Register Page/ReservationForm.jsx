@@ -1,5 +1,6 @@
 import React from 'react';
-import './style.css';  // Ensure the path to your CSS file is correct
+import './register.css';  // Adjust the path if your CSS file is located elsewhere
+
 function ReservationForm() {
     return (
       <div className="container">
@@ -12,16 +13,28 @@ function ReservationForm() {
                 <input type="text" placeholder="First Name" required />
               </div>
               <div className="input-box">
-                <span className="details">last</span>
-                <input type="password" placeholder="Last name" required />
+                <span className="details">Last Name</span>
+                <input type="text" placeholder="Last name" required />
               </div>
               <div className="input-box">
-                <span className="details">Phone number</span>
-                <input type="text" placeholder="Enter Manager ID" required />
+                <span className="details">Phone Number</span>
+                <input type="text" placeholder="Enter your phone number" required />
               </div>
               <div className="input-box">
-                <span className="details">Location Address</span>
-                <input type="text" placeholder="Enter location address" required />
+                <span className="details">Date of Reservation</span>
+                <input type="date" required />
+              </div>
+              <div className="input-box">
+                <span className="details">Time of Reservation</span>
+                <input type="time" required />
+              </div>
+              <div className="input-box">
+                <span className="details">Number of Guests</span>
+                <input type="number" placeholder="Enter number of people" required min="1" max="100" />
+              </div>
+              <div className="input-box">
+                <span className="details">Special Requests/Notes</span>
+                <textarea placeholder="Add any special requests or notes here" rows="4"></textarea>
               </div>
             </div>
             <div className="button">
@@ -31,6 +44,6 @@ function ReservationForm() {
         </div>
       </div>
     );
-  }
+}
 
-  export default ReservationForm;
+export default ReservationForm;
