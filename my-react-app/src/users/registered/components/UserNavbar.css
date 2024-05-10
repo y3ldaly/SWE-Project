@@ -1,9 +1,22 @@
 
+body {
+    margin: 0px
+
+}
 h1 {
     font-size: 40px;
-    font-family: "Lucida Bright", Georgia, serif;
     text-align: center;
-    color: white;
+    color: black;
+    margin-right: 50px;
+    display: inline-block;
+}
+
+.user-navbar {
+    background-color: rgb(200, 212, 222);
+    margin: 0px;
+    width: 100%;
+    background: linear-gradient(to top, rgb(200, 212, 222), aliceblue);
+
 }
 
 .user-navbar ul {
@@ -13,25 +26,28 @@ h1 {
     margin-bottom: 30px;
     padding-top: 2px;
     padding-bottom: 2px;
-
+    color: black;
     display: flex;
     justify-content: center;
     
 }
 
 .user-navbar li {
-    margin-right: 120px;
+    margin-right: 50px;
 }
 
 .user-navbar a {
-    color: white;
     font-size: 24px;
     font-weight: bold;
-    font-family: "Lucida Bright", Georgia, serif;
+    font-family: 'Poppins', 'Trebuchet MS', 'Cambria';
     text-decoration: none;
     padding: 10px;
     display: inline-block;
     text-align: center;
+}
+
+.user-navbar a:visited {
+    color: black;
 }
 
 .user-navbar a:hover {

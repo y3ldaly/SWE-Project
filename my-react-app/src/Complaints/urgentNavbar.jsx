@@ -7,7 +7,7 @@ function Navbar() {
       <h1>HIFRY HALAL</h1>
       <nav className="navbar">
         <ul>
-            <li></li>
+            <li></li>z
             <li></li>
           <li><a href="main.html" className="navButton">Home</a></li>
           <li><a href="menu.html" className="navButton">Menu</a></li>

@@ -4,10 +4,9 @@
 
 function UserNavbar() {
     return(
-        <>
-            <h1>HIFRY HALAL</h1>
-            
+        <> 
             <nav class="user-navbar">
+            <h1>HIFRY HALAL</h1>
                 <ul>
                     <li><a href="#" id="home" class="navButton">Home</a></li> 
                     <li><a href="#" id="menu" class="navButton">Menu</a></li>
