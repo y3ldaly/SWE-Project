@@ -34,7 +34,6 @@
 // import PaymentDetailsPage from "./pages/PaymentDetailsPage";
 // import OrderConfirmationPage from "./pages/OrderConfirmationPage";
 // import OrderPrompt from "./pages/OrderPrompt";
-// import ManagerPD from './managers/pages/ManagerAction'
           
 
 const App = () => {
