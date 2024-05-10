@@ -1,6 +1,8 @@
 import './DemoteButton.css';
 import chefProfile from '../assets/chef-profile-pic.png';
 import DishButton from '../../users/registered/components/DishButton';
+import PropTypes from 'prop-types'
+
 
 function DemoteButton(props) {
     // Assuming props.dishCount is the number of DishButtons to render
@@ -24,6 +26,12 @@ function DemoteButton(props) {
         </div>
        
     );
+}
+
+DemoteButton.propTypes = {
+    chefName: PropTypes.string.isRequired,
+    dishCount: PropTypes.number.isRequired,
+    buttonName: PropTypes.string.isRequired,
 }
 
 export default DemoteButton;

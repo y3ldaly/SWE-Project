@@ -1,29 +1,25 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-
+// import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import DemoteChefsPage from "./managers/pages/DemoteChefsPage.jsx";
+// import UserNavbar from "./users/registered/components/UserNavbar.jsx";
 // import PromoteChefsPage from './managers/pages/PromoteChefsPage.jsx'
-// import UserNavbar from "./users/registered/components/UserNavbar.jsx"
-import ManagerNavbar from "./managers/components/ManagerNavbar.jsx"
+
+
 
 
 function App() {
-    return ( 
-        <>
-           <BrowserRouter>
-                <ManagerNavbar/>
-                <div className="pages">
-                    <Routes>
-                        <Route
-                            path="/"
-                            // element={<PromoteChefsPage/>}
-                        />
+  return (
+    <BrowserRouter>
+      
 
-                    </Routes>
-
-                </div>
-           </BrowserRouter>
-           
-        </>
-    )
+      <div className="pages">
+        <Routes>
+          <Route path="/" element={<DemoteChefsPage />} />
+          {/* Add more routes here */}
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

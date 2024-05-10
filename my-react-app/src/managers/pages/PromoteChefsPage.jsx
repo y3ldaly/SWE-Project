@@ -1,5 +1,7 @@
+// import { useState, }
+
 import ManagerNavbar from "../components/ManagerNavbar"
-import PromoteButton from "../components/PromoteButton"
+
 import PromotionCard from "../components/PromotionCard"
 import ConfirmButton from "../../components/ConfirmButton"
 
@@ -11,8 +13,6 @@ function PromoteChefsPage() {
         <>
             <ManagerNavbar/>
             <PromotionCard/>
-            {/* <PromoteButton link="/"/> */}
-            {/* <PromoteButton/> */}
             <ConfirmButton/>
         </>
     )

@@ -1,4 +1,4 @@
-
+import PropTypes from 'prop-types'
 import './DishButton.css'
 
 function DishButton(props) {
@@ -16,6 +16,14 @@ function DishButton(props) {
             </div>
         </div>
     );
+}
+
+DishButton.propTypes = {
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired, // Validate img prop as a required string
+    altText: PropTypes.string.isRequired, // Validate altText prop as a required string
+    price: PropTypes.number.isRequired, // Validate price prop as a required number
 }
 
 export default DishButton

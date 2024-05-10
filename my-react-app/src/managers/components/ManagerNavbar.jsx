@@ -1,4 +1,4 @@
-import { useState } from 'react'; // Import useState hook for managing state
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import profilePic from '../assets/manager-profile-pic.jpg'
