@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.css';  // Adjust the path if your CSS file is located elsewhere
+import './register.css';  // Adjust the path if your CSS file is located elsewhere
 
 function CustomerRegistrationForm() {
   return (
