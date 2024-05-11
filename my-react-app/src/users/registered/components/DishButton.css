@@ -1,0 +1,59 @@
+/* FIXME: the cards need to be positioned so that there's 2 for each row */
+
+#dishbutton-container {
+    flex-wrap: wrap; /* Enable wrapping */
+    justify-content: space-between; /* Adjust alignment */
+    width: calc(50% - 75px); /* Adjust width to fit two items per line */
+    margin: 50px 100px; /* Adjust margin */
+}
+
+#dishbutton-container #button {
+    position: relative; 
+    border: 1px solid lightgray;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    width: 500px;
+    /* width: 100%;
+    max-width: 500px; */
+    margin-bottom: 50px;
+    
+    border-radius: 5px;
+    overflow: hidden; /* Ensures the container wraps around the content */
+    margin: 0px;
+    font-family: 'Trebuchet MS', 'Playfair Display', serif;
+    background-color: white;
+}
+
+#dishbutton-container #content {
+    position: relative; /*?*/
+    display: flex;
+}
+
+#dishbutton-container #text {
+    flex: 1; /* Take up remaining space */
+    margin-left: 10px;
+}
+
+#dishbutton-container #image {
+    width: 200px; /* Adjust as needed */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px;
+    margin-left: 20px; /* Add some space between text and image */
+}
+
+#dishbutton-container #price {
+    position: absolute;
+    top: -10px;
+    right: 5px;
+    background-color: black;
+    border-radius: 5px;
+    color: white;
+    width: auto;
+    padding: 1.5px;
+    font-weight: bold;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#dishbutton-container #title {
+    font-weight: bold;
+    font-size: 20px;
+}

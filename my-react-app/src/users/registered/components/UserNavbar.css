@@ -1,0 +1,93 @@
+/* UserNavbar.css */
+.navbar {
+    /* display: flex; */
+    justify-content: space-between;
+    align-items: center;
+    background-color: aliceblue;
+    padding: 10px 20px;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 3px 0px 5px gray;
+  }
+  
+  .title {
+    margin-right: auto; /* Pushes the title to the left */
+  }
+  
+  /* .nav-links {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 10px; 
+    justify-content: center; 
+  } */
+  
+  .nav-links li {
+    margin: 10px 50px 0px 0px;
+  }
+  
+  .nav-links li:last-child {
+    margin-right: 0;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: black;
+  }
+
+  /* li .menu:hover {
+    text-decoration: none;
+  } */
+
+  .dropdown-menu .menu {
+    margin: 0px;
+    width: 100px;
+  }
+  .nav-links {
+    display: flex;
+    justify-content: center; /* Align links to the center */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 40px;
+  }
+  
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Additional styles for profile dropdown */
+  .profile-container {
+    position: relative;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%; /* Position dropdown below profile pic */
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    /* padding: 5px; */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .dropdown-menu ul li {
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu ul li:hover {
+    background-color: #f0f0f0;
+  }
+  .navbar .profile-pic {
+    width: 35px;
+    position: relative;
+    top: 5px;
+    cursor: pointer;
+}

@@ -1,0 +1,101 @@
+.card {
+  width: 180px; /* Reduced from 200px to make the cards smaller */
+  margin: 20px; /* Reduced overall margin to bring cards closer together */
+  transition: transform 0.3s ease-in-out; /* Smooth transformation on hover */
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 40px; /* Increased top margin to bring cards down */
+}
+
+.property-card {
+  height: 16em; /* Reduced height */
+  width: 100%; /* Make width relative to the card container */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Refined shadow for better aesthetics */
+  transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  background-color: white;
+}
+
+.property-image, .property-image1, .property-image2 {
+  height: 50%; /* Adjust image container to new card size */
+  padding: 0.5em 1em; /* Reduced padding */
+  background-size: cover;
+  background-position: center; /* Center background images */
+  background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHfKC1Cl0waFf5ulXWLAFZ_TvMY1W3g-iSQ8O7E6CY2Q&s');
+  background-repeat:no-repeat;
+}
+
+.property-description {
+  padding: 0.5em; /* Adjust padding for description to fit new card size */
+}
+
+/* Enhance hover effect to make transformation more noticeable */
+.property-card:hover {
+  transform: translateY(-10px);
+}
+
+/* Adjust other elements as necessary to fit the new card size */
+.property-description h5, .property-description p {
+  margin: 5px 0; /* Adjust spacing between text elements */
+}
+
+body {
+   background: -webkit-linear-gradient(right, #56d8e4, #9f01ea, #56d8e4, #9f01ea);
+   font-family: 'RobotoDraft', 'Roboto', sans-serif;
+   -webkit-font-smoothing: antialiased;
+}
+
+h2 {
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 10px; /* Slightly reduce the bottom margin if necessary */
+}
+
+.property-card:hover .property-social-icons {
+  background-color: white;
+  cursor: pointer;
+}
+.cancel-button-container {
+  display: flex;
+  justify-content: center; /* Centers the button horizontally */
+  padding: 20px; /* Adds padding around the button */
+}
+
+.cancel-button {
+  padding: 10px 20px;
+  background-color: #d9534f; /* Bootstrap’s btn-danger color for reference */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px; /* Makes text larger and more readable */
+  transition: background-color 0.3s ease;
+}
+
+.cancel-button:hover {
+  background-color: #c9302c; /* Darken the color on hover for feedback */
+}
+.title-header {
+  background-color: #c13e3e; /* Teal dark shade, adjust as needed */
+  color: white; /* White text */
+  text-align: center;
+  font-size: 24px; /* Adjust based on design requirements */
+  padding: 20px 0; /* Top and bottom padding */
+  margin: 0 auto; /* Centering if needed and remove default margins */
+  width: 100%; /* Ensure it spans the full width */
+  font-family: 'Arial', sans-serif; /* Example font, adjust as needed */
+}
+
+
+.warning-message {
+  position: fixed;   /* Fixed positioning relative to the viewport */
+  top: 0;            /* Aligns the top edge of the element with the top of the viewport */
+  left: 0;           /* Aligns the left edge of the element with the left of the viewport */
+  background-color: red; /* Background color for visibility */
+  color: red;      /* Text color */
+  padding: 10px;     /* Some padding around the text */
+  z-index: 1000;     /* Ensures it stays on top of other content */
+}

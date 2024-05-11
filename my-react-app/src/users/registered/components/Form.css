@@ -1,0 +1,93 @@
+.dropdown{
+    display: inline-block;
+    position: relative;
+    bottom: 600px;
+    left: 400px;
+}
+.dropdown button{
+    background-color: hsl(0, 0%, 80%);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+.dropdown a{
+    display: block;
+    color: black;
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+.dropdown .content a {
+    display: block; /* Change display to block */
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Show ellipsis (...) for overflow text */
+}
+
+.dropdown .content{
+    display: none;
+    position: absolute;
+    background-color: hsl(0, 0%, 95%);
+    min-width: 100px;
+    box-shadow: 2px 2px 5px hsla(0, 0%, 0%, 0.8);
+}
+.dropdown:hover .content{
+    display: block;
+}
+.dropdown:hover button{
+    background-color: hsl(0, 0%, 70%);
+}
+.dropdown a:hover{
+    background-color: hsl(0, 0%, 90%);
+}
+
+.container {
+    max-width: 600px;
+    margin-top: 15px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+
+    transform: translate(400px,75px);
+    margin-bottom: 100px;
+}
+.input-text {
+    width: calc(100% - 100px);
+    height: 300px;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    overflow: auto;
+    word-wrap: break-word; /* Wrap long words */
+    resize: vertical; /* Allow vertical resizing */
+    position: relative;
+    left: 30px;
+}
+
+.submit-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+    left: 30px;
+}
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+#form-caption {
+    position: relative;
+    left: 30px;
+    bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}

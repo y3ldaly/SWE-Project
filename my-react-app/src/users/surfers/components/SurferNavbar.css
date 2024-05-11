@@ -1,0 +1,96 @@
+
+/* h1 {
+    font-size: 40px;
+    font-family: "Lucida Bright", Georgia, serif;
+    text-align: center;
+    color: white;
+ } */
+ 
+ 
+ .surfer-navbar ul {
+    list-style-type: none;
+    /* background-color: #D2691E; */
+    padding: 0px;
+    margin-bottom: 30px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+ 
+ 
+    display: flex;
+    justify-content: center;
+   
+ }
+ 
+ 
+ .surfer-navbar li {
+    margin-right: 70px;
+ }
+ 
+ 
+ .surfer-navbar a {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: "Lucida Bright", Georgia, serif;
+    text-decoration: none;
+    padding: 10px;
+    display: inline-block;
+    text-align: center;
+ }
+ 
+ 
+ .surfer-navbar a:hover {
+    background-color: #aa0e4a;
+ }
+ 
+ .sign-up {
+   background-color: #4a5a98; /* Vibrant green background */
+   color: white; /* White text for contrast */
+   font-size: 16px; /* Adequate text size */
+   font-weight: bold; /* Bold text to make it stand out */
+   padding: 12px 24px; /* Vertical and horizontal padding */
+   border: none; /* No border for a modern look */
+   border-radius: 5px; /* Slightly rounded corners */
+   cursor: pointer; /* Cursor changes to a pointer to indicate it's clickable */
+   text-transform: uppercase; /* Uppercase text for a more impactful design */
+   transition: background-color 0.3s, transform 0.2s; /* Smooth transition for hover effects */
+   outline: none; /* Remove outline to clean up focus state */
+}
+
+
+.sign-up:hover, .sign-up:focus {
+   background-color: #45A049; /* Slightly darker shade of green on hover/focus */
+   transform: scale(1.05); /* Slightly increase size on hover/focus for effect */
+}
+
+
+.sign-up:active {
+   background-color: #3E8C43; /* Even darker for the active state */
+   transform: scale(0.98); /* Slight shrink effect when clicked */
+}
+
+.login {
+   background-color: rgb(99, 141, 200); /* Deep grey background, neutral and professional */
+   color: white; /* White text for contrast */
+   font-size: 16px; /* Consistent text size with the sign-up button */
+   font-weight: bold; /* Bold text to highlight the button */
+   padding: 12px 24px; /* Padding to ensure it's clickable and looks balanced */
+   border: none; /* No border for a sleek look */
+   border-radius: 5px; /* Rounded corners for a modern appearance */
+   cursor: pointer; /* Changes the cursor to indicate it's clickable */
+   text-transform: uppercase; /* Uppercase text for a uniform design with the sign-up button */
+   transition: background-color 0.3s, transform 0.2s; /* Smooth transitions for interactive effects */
+   outline: none; /* Removes the outline to maintain a clean focus state */
+}
+
+
+.login:hover, .login:focus {
+   background-color: #6e6e6e; /* A lighter grey for hover/focus to provide feedback */
+   transform: scale(1.05); /* Slightly enlarges the button on hover/focus for a dynamic effect */
+}
+
+
+.login:active {
+   background-color: #4d4d4d; /* Darker grey for the active state to simulate a button press */
+   transform: scale(0.98); /* Subtle shrink effect when the button is clicked */
+}

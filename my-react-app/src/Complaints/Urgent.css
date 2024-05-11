@@ -1,0 +1,68 @@
+.alert-box {
+    width: 90%;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f0f9ff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    color: #333;
+    font-family: Arial, sans-serif;
+  }
+  
+  .alert-header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .alert-icon {
+    font-size: 30px;
+    color: orange;
+  }
+  
+  .alert-body {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .alert-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .dispute {
+    background-color: #ffc107;
+  }
+  
+  .ignore {
+    background-color: #ccc;
+  }
+  body {
+    background: -webkit-linear-gradient(right, #56d8e4, #9f01ea, #56d8e4, #9f01ea);
+    background-repeat: no-repeat;
+    background-attachment: fixed; /*stretches background*/
+    background-position: center;
+    background-size: cover;
+    margin: 0px;
+ }
+  /* For better mobile view */
+  @media (max-width: 600px) {
+    .alert-actions {
+      flex-direction: column;
+    }
+  }
+  
+  

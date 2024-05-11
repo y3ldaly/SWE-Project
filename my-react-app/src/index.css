@@ -1,0 +1,554 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sedan+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sedan+SC&display=swap');
+
+* {
+    font-family: 'Poppins', 'Trebuchet MS', 'Cambria';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+body {
+    /* background: linear-gradient(to top, #C0CAAD, #9DA9A0); */
+    /* font-family: "Garbata-Regular"; */
+    overflow-x: hidden;
+    background-color: aliceblue;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /*stretches background*/
+    background-position: center;
+    background-size: cover;
+    font-family: 'Poppins', 'Trebuchet MS', 'Seguoe UI';
+    margin: 0;
+}
+
+#order-prompt {
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@font-face {
+  font-family: "Garbata-Bold";
+  src: url("./assets/fonts/GarbataTrial-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Garbata-Regular";
+  src: url("./assets/fonts/GarbataTrial-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Garbata-ExtraBold";
+  src: url("./assets/fonts/GarbataTrial-Extrabold.ttf");
+}
+
+@font-face {
+  font-family: "Garbata-Medium";
+  src: url("./assets/fonts/GarbataTrial-Medium.ttf");
+}
+
+
+
+
+
+.page {
+  width: 100vw;
+  min-height: 100vh;
+  padding: 40px;
+}
+
+.container {
+  width: 1000px;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+
+h1 {
+  font-family: 'Permanent Marker', 'Poppins', 'Trebuchet MS', 'Cambria';
+  font-size: 50px;
+  font-weight: bold;
+  font-size: 40px;
+  text-align: center;
+  color: black;
+  margin: 0px 20px 0px 0px;
+  display: block;
+  /* width: 50px; */
+}
+/* h1 {
+  font-size: 72px;
+  color: white;
+  text-align: center;
+  font-family: 'Permanent Marker', 'Poppins', 'Trebuchet MS', 'Cambria';
+  margin-bottom: 40px;
+} */
+
+p {
+  font-size: 28px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text__red {
+  color: #f47068;
+}
+
+.btn {
+  background-color: white;
+  width: 300px;
+  font-size: 34px;
+  font-weight: bold;
+  padding: 10px;
+  padding-left: 20px;
+  text-align: center;
+  /* margin: auto; */
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  outline: none;
+  border: 3px solid black;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  width: 590px;
+  gap: 10px;
+  max-width: 95%;
+  height: 200px;
+  margin: 0 auto;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 -2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card .content {
+  padding: 15px;
+}
+
+.card img {
+  width: 200px;
+  height: auto;
+}
+
+.card h3 {
+  font-size: 34px;
+  margin-bottom: 15px;
+}
+
+.card p {
+  font-size: 16px;
+  font-weight: normal;
+  margin-bottom: 15px;
+  color: rgb(61, 56, 56);
+}
+
+header {
+  padding: 0 50px;
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .nav__item {
+  color: #f47068;
+  cursor: pointer;
+}
+
+header .nav__item__active {
+  color: #ffc24a;
+}
+
+header img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.registration__page {
+  background-color: #a7d2dd;
+}
+
+.registration__page p {
+  margin-bottom: 20px;
+  color: white;
+}
+
+.buttonsContainer {
+  width: 930px;
+  max-width: 90%;
+  margin: 80px auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 60px;
+}
+.buttonsContainer .btn {
+  margin: auto;
+}
+
+.manager__registration__page {
+  background-color: #0f606b;
+}
+
+.deliveryman__registration__page {
+  background-color: #a7d2dd;
+}
+
+form {
+  background-image: url("./assets/form-background.png");
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #0f606b;
+  font-size: 33px;
+  margin-top: 40px;
+}
+
+.form__control {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.form__control input {
+  width: 60%;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid #bfbdbc;
+  background-color: transparent;
+  font-family: "Garbata-Regular";
+  font-size: 34px;
+}
+
+.review__page {
+  color: black;
+}
+
+.message {
+  margin: 40px 0;
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 1.4;
+}
+
+.report__page {
+  background-color: #f2f3f5;
+}
+
+.report__page .card__container {
+  display: flex;
+  gap: 80px;
+}
+.report__page .card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #4f8dea;
+  border-radius: 0;
+  cursor: pointer;
+}
+.card__container .card .card__text {
+  font-size: 34px;
+  color: black;
+}
+
+.order__confirmation__page {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.order__confirmation__page p {
+  font-size: 23px;
+}
+
+.order__confirmation__page h2 {
+  font-size: 30px;
+}
+
+.order__confirmation__page .order__id {
+  font-size: 16px;
+  color: rgb(61, 60, 60);
+}
+
+.order__confirmation__page .avatar {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  border: 2px solid gray;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.order__confirmation__page .text-green {
+  color: rgb(21, 197, 21);
+}
+.order__confirmation__page img {
+  width: 80px;
+  height: 80px;
+}
+
+.order__confirmation__page .bottom {
+  margin-top: 60px;
+}
+
+.order__confirmation__page .bottom .buttons__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  gap: 20px;
+}
+
+.order__confirmation__page .bottom .buttons__wrapper .btn {
+  width: 250px;
+  font-size: 20px;
+  border: transparent;
+  justify-content: center;
+}
+
+.order__confirmation__page .bottom .buttons__wrapper .btn-blue {
+  background-color: #4a6bad;
+  border: 2px solid #4a6bad;
+  color: white;
+}
+
+.order__confirmation__page .bottom .buttons__wrapper .btn-red-outline {
+  border: 2px solid #f47068;
+  color: #f47068;
+}
+
+.last__page {
+  background-color: #f2f3f5;
+}
+
+.last__page .container .heading {
+  color: black;
+  margin-top: 50px;
+}
+
+.last__page .container .subheading {
+  font-size: 30px;
+  text-align: center;
+}
+
+.order__prompt__page .cardsWrapper {
+  display: flex;
+  gap: 40px;
+}
+
+.order__prompt__page .cardsWrapper .card {
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.order__prompt__page .cardsWrapper .card:hover {
+  background-color: red;
+  color: white;
+}
+
+.order__prompt__page .cardsWrapper .card img {
+  height: 140px;
+}
+
+.menu__wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.menu__wrapper .card {
+  width: 100%;
+  position: relative;
+}
+
+.menu__wrapper .card .content h3 {
+  font-size: 20px;
+}
+
+.price__tag {
+  position: absolute;
+  background-color: black;
+  color: white;
+  padding: 10px;
+  border-radius: 100px;
+  top: 10px;
+  right: 10px;
+  font-weight: bold;
+}
+
+.payment__details__page .container h2 {
+  color: black;
+  font-size: 30px;
+  margin: 20px 0;
+  text-align: center;
+  margin: 10px auto;
+}
+.payment__details__page .container .card {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  justify-content: start;
+  align-items: start;
+  padding: 20px;
+  gap: 15px;
+}
+
+.payment__details__page .container .card .form-control {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 90%;
+  margin: 0 auto;
+}
+.payment__details__page .container .card .form-group {
+  display: flex;
+  margin: 0 auto;
+  width: 90%;
+  gap: 20px;
+}
+.payment__details__page .container .card .form-control input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid rgb(206, 197, 197);
+}
+
+.btn-primary {
+  width: 80%;
+  outline: none;
+  border: none;
+  background-color: rgb(23, 151, 202);
+  color: white;
+  padding: 10px;
+  margin: 0 auto;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: rgb(12, 117, 158);
+}
+
+.paymentOptions {
+  text-align: center;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 1024px) {
+  h1 {
+    font-size: 60px;
+  }
+  .buttonsContainer {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 20px;
+  }
+  .btn {
+    font-size: 30px;
+  }
+
+  .report__page .card__container {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  .report__page .card__container .card__text {
+    font-size: 25px;
+  }
+
+  .order__confirmation__page .bottom .buttons__wrapper {
+    flex-direction: column;
+    margin-top: 30px;
+    gap: 20px;
+  }
+
+  .menu__wrapper {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+  }
+
+  .card {
+    gap: 4px;
+  }
+
+  .card img {
+    width: 140px;
+    height: 100%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  header {
+    padding: 0 20px;
+  }
+  h1 {
+    font-size: 50px;
+  }
+  .btn {
+    font-size: 28px;
+  }
+  form,
+  input {
+    font-size: 20px;
+  }
+  header img {
+    width: 30px;
+    height: 30px;
+  }
+  .nav__item {
+    font-size: 16px;
+  }
+
+  .report__page .card__container .card__text {
+    font-size: 22px;
+  }
+
+  .order__prompt__page .cardsWrapper {
+    gap: 20px;
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  h1 {
+    font-size: 40px;
+  }
+  .btn {
+    font-size: 24px;
+  }
+
+  form,
+  input {
+    font-size: 18px;
+  }
+}

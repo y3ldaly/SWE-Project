@@ -1,0 +1,70 @@
+.add-deposit-container {
+    font-family: 'Arial', sans-serif;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #FAFAFA;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+h2 {
+    background-color: #004d40; /* Dark teal background */
+    color: white;
+    padding: 20px 0;
+    margin: 0 0 20px 0;
+}
+
+.balance-info {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.balance-item {
+    background-color: #e0f2f1; /* Light teal background */
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: #004d40; /* Dark teal text */
+}
+
+.deposit-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.deposit-form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.deposit-form input {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.deposit-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #00897b; /* Teal button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.deposit-form button:hover {
+    background-color: #00695c; /* Darker teal */
+}
+body {
+    background: -webkit-linear-gradient(right, #56d8e4, #9f01ea, #56d8e4, #9f01ea);
+    font-family: 'RobotoDraft', 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+ }
+ 
