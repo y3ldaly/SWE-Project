@@ -1,6 +1,5 @@
 // import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import DemoteChefsPage from "./managers/pages/DemoteChefsPage.jsx";
 // import UserNavbar from "./users/registered/components/UserNavbar.jsx";
 // import PromoteChefsPage from './managers/pages/PromoteChefsPage.jsx'
 

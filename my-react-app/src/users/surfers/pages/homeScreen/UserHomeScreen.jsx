@@ -1,8 +1,25 @@
+import { useEffect, useState } from 'react'
+
 import HomeScreenCard from "../../components/HomeScreenCard"
 import UserNavbar from "../../../registered/components/UserNavbar"
 import shawarma from '../../assets/shawarma.jpg'
 import nihari from '../../assets/nihari.png'
 import biryani from '../../assets/chicken-biryani.jpg'
+
+const [topDishes, setTopDishes]
+
+useEffect(() => {
+    const fetchTopDishes = async () => {
+        // const response = await fetch('http://localhost:4000/api/')
+        const json = await response.json()
+
+        if (response.ok) {
+            setTopDishes(json)
+        }
+    }
+
+    fetchTopDishes();
+}, [])
 
 function UserHomeScreen() {
     return(
