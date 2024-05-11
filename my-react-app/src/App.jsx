@@ -15,8 +15,8 @@ function App() {
 
       <div className="pages">
         <Routes>
-          <Route path="/users" element={<UserHomeScreen/>} />
-          {/* Add more routes here */}
+          <Route path="/" element={<UserHomeScreen/>} /> 
+          
         </Routes>
       </div>
     </BrowserRouter>
