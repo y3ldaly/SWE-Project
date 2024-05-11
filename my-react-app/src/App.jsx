@@ -9,7 +9,7 @@
 // import ManagerRegistrationForm from './Register Page/ManagerRegForm';
 // import AddDeposit from "./insufficient funds/addDepoist"
 // import InsufficientFunds from "./insufficient funds/insufficient"
-// import HomeScreen from './HomeScreen/HomeScreen'
+import HomeScreen from './HomeScreen/HomeScreen'
 // import VIPUser from './HomeScreen/VIPHomeScreen'
 // import AddDeposit from './insufficient funds/addDepoist'
 // import Complaints from "./Complaints/Urgent"
@@ -40,7 +40,7 @@
 const App = () => {
   return (
     <div>
-//       <RegistrationPage />
+{/* //       <RegistrationPage />
 //       <ManagerRegistration />
 //       <DeliveryMenRegistration />
 //       <ReviewPage />
@@ -50,9 +50,9 @@ const App = () => {
 //       <ComplimentSuccessPage />
 //       <DiscussionPage />
 //       <LastPage />
-//       <OrderPrompt />
-//       <MenuPage />
-//       <PaymentDetailsPage />
+//       <OrderPrompt /> */}
+//       <HomeScreen />
+{/* //       <PaymentDetailsPage /> */}
     </div>
   );
 };

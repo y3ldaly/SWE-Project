@@ -1,6 +1,5 @@
 import React from 'react';
 import './HomeScreen.css'; // Ensure your CSS paths are correct
-import './navbar.css';
 import Shawarma from '../users/registered/assets/shawarma.jpg'
 import FoodCard from "./foodcard"
 import Biryani from '../users/registered/assets/biryani.png'
