@@ -1,10 +1,12 @@
 import './PaymentPage.css';
-import paymentTypes from '../assets/payment-types.png';
+import paymentTypes from '../../../assets/payment-types.png';
+// import { Link } from 'react-router-dom';
 
-function PaymentPage() {
+
+function Delivery() {
     return (
         <>
-            <h1 className="title">HIFRY Halal</h1>
+            <h1 className="title">HIFRY HALAL</h1>
             <div className="container">
                 <form action="#">
                     <div className="row">
@@ -74,10 +76,12 @@ function PaymentPage() {
                         </div>
                     </div>
                     <input type="submit" value="Proceed to Checkout" className="submit_btn"/>
+                    {/* write a function that compares card $ to order price, redirect
+                    to insufficient page if not enough */}
                 </form>
             </div>
         </>
     );
 }
 
-export default PaymentPage;
+export default Delivery;

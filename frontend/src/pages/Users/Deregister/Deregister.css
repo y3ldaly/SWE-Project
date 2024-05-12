@@ -1,0 +1,51 @@
+.deregister-container {
+    width: 100%;
+    max-width: 600px; /* Adjust width as necessary */
+    margin: 50px auto; /* Centering the form */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+  }
+  
+  .deregister-container h1 {
+    color: #333;
+  }
+  
+  .deregister-container p {
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .deregister-container input[type="password"] {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  
+  .red {
+    background-color: #ff4d4d;
+    color: white;
+  }
+  
+  .yellow {
+    background-color: #ffcc00;
+    color: white;
+  }
+  
+  .button:hover {
+    opacity: 0.8;
+  }
+  

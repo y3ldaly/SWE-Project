@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './LoginForm.css';  // Assuming your CSS file is named style.css
-
+import { Link } from 'react-router-dom';
 
 function LoginForm() {
   const [email, setEmail] = useState('');
@@ -36,7 +36,7 @@ function LoginForm() {
           </div>
         </div>
         <div className="field">
-          <input type="submit" value="Login" />
+          <Link to="/"><input type="submit" value="Login" /></Link>
         </div>
         <div className="signup-link">
           Not a member? <a href="#">Signup now</a>

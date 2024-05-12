@@ -29,12 +29,11 @@
 }
 
 body {
-    /* background: linear-gradient(to top, #C0CAAD, #9DA9A0); */
-    /* font-family: "Garbata-Regular"; */
+
     overflow-x: hidden;
     background-color: rgb(209, 229, 246);
     background-repeat: no-repeat;
-    background-attachment: fixed; /*stretches background*/
+    background-attachment: fixed; 
     background-position: center;
     background-size: cover;
     font-family: 'Poppins', 'Trebuchet MS', 'Seguoe UI';

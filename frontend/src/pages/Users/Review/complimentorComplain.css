@@ -1,0 +1,64 @@
+.menut {
+  position: relative;
+  top: 50px;
+  text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    color: #333;
+    width: 100%; /* Ensures the h1 is full width to maintain its own row */
+}
+
+.container {
+    display: flex;
+    flex-direction: row; /* Align items horizontally */
+    justify-content: center; /* Center items horizontally in the container */
+    align-items: center; /* Center items vertically */
+    min-height: 30vh; /* Adjust as needed to position higher */
+    padding-top: 40px;
+    padding-bottom: 20px;
+    flex-wrap: wrap; /* Allows items to wrap onto the next line if space is limited */
+  }
+  
+  .card {
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 300px;
+    height: 300px;
+    margin: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    /* gap: 30px; */
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .card:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+  }
+  
+  .card p {
+    font-size: 24px;
+    margin: 0;
+    line-height: 1.5;
+    color: white;
+  }
+  
+  .cardsWrapper .card .image {
+    width: 150px;
+    height: 150px;
+  }
+
+  .cardsWrapper {
+    display: flex;
+    flex-direction: row; /* Align items horizontally */
+    justify-content: center; /* Center items horizontally in the container */
+    align-items: center; /* Center items vertically */
+  }

@@ -7,43 +7,16 @@ import HomeScreenCard from '../../../components/Cards/HomeScreen/HomeScreenCard'
 function UserHomeScreen() {
     const [existingDish, setExistingDish] = useState([]);
 
-    // const dishes = [
-    //     {
-    //       dishName: "Biryani",
-    //       description: "chicken over rice",
-    //       price: "$9.99",
-    //       keywords: ["chicken", "rice"],
-    //       imageUrl: "https://www.indianhealthyrecipes.com/wp-content/uploads/2021/12/chicken-biryani-1024x1536.jpg.webp"
-    //     },
-    //     {
-    //       dishName: "",
-    //       description: "",
-    //       price: "",
-    //       keywords: [],
-    //       imageUrl: ""
-    //     },
-    //     {
-    //       dishName: "",
-    //       description: "",
-    //       price: "",
-    //       keywords: [],
-    //       imageUrl: ""
-    //     },
-    //     {
-    //       dishName: "",
-    //       description: "",
-    //       price: "",
-    //       keywords: [],
-    //       imageUrl: ""
-    //     },
-    //     {
-    //       dishName: "",
-    //       description: "",
-    //       price: "",
-    //       keywords: [],
-    //       imageUrl: ""
-    //     }
-    //   ];
+    const dishes = [
+        {
+          title: "Biryani",
+          caption: "chicken over rice",
+          price: "$9.99",
+          rating: 5,
+          altText: "biryani",
+          img: "https://www.indianhealthyrecipes.com/wp-content/uploads/2021/12/chicken-biryani-1024x1536.jpg.webp",
+        },
+      ];
       
       console.log('BROTHA EWWWWWWWW');
 
@@ -74,15 +47,17 @@ function UserHomeScreen() {
         <>
             <Navbar/>
             <h3 className='third-title'>Welcome, User</h3>
-            <h2 className='second-title'>Top Three Dishes</h2>
+            <h2 className='second-title'>Top 3 Dishes:</h2>
             <div className='card-container'>
                 {existingDish.map((dish) => (
                     <HomeScreenCard
-                        key={dish._id}  // Assuming each dish document has an _id field
-                        img={dish.imageUrl}  // Make sure this field name matches your data
-                        // altText={dish.altText}
-                        title={dish.dishName}
-                        caption={dish.description}
+                        // key={dish._id}  // Assuming each dish document has an _id field
+                        img={dish.img}  // Make sure this field name matches your data
+                        altText={dish.altText}
+                        title={dish.title}
+                        caption={dish.caption}
+                        rating={dish.rating}
+                        price={dish.price}
                     />
                 ))}
             </div>

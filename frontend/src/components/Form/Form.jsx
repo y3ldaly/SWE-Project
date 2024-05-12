@@ -1,4 +1,5 @@
 import './Form.css';
+import { Link } from 'react-router-dom';
 
 function Form(props) {
     // Function to handle click on an option
@@ -20,7 +21,7 @@ function Form(props) {
                 <form id="message-form">
                 <p id="form-caption">{props.caption}</p>
                     <textarea id="message-input" class="input-text" placeholder="Type your message..."/><br /><br />
-                    <button type="submit" class="submit-button">Submit</button>
+                    <Link to='/review/customer'><button type="submit" class="submit-button">Submit</button></Link>
                 </form>
             </div>
             <div className="dropdown">

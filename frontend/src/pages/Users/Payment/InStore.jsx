@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../pages/Surfers/Register/register.css';  // Adjust the path if your CSS file is located elsewhere
+// import '../../../pages/Surfers/Register/register.css'
 
 function ReservationForm() {
     return (

@@ -16,9 +16,9 @@ function Navbar() {
                 <h1 className="title">HIFRY HALAL</h1>
                 <ul className="nav-links">
                     <li><Link to="/">Home</Link></li>
-                    <li><Link to="/menus">Menu</Link></li>
+                    <li><Link to="/menu">Menu</Link></li>
                     <li><Link to="/order">Order</Link></li>
-                    <li><Link to="/feedback">Review</Link></li>
+                    <li><Link to="/review">Review</Link></li>
                     <div className="profile-container">
                         <img
                             src={profilePic}
@@ -29,9 +29,8 @@ function Navbar() {
                         {isDropdownVisible && (
                             <div className="dropdown-menu">
                                 <ul>
-                                    <li><Link to="/profile">Profile</Link></li>
                                     <li><Link to="/deregister">De-Register</Link></li>
-                                    <li><Link to="/logout">Log out</Link></li>
+                                    <li><Link to="/login">Log out</Link></li>
                                 </ul>
                             </div>
                         )}

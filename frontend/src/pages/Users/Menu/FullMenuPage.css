@@ -1,0 +1,7 @@
+.subtitle {
+    position: relative;
+    left: 20px;
+    font-size: 28px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-decoration: underline;
+}
