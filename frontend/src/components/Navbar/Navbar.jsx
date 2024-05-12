@@ -17,7 +17,7 @@ function Navbar() {
                 <ul className="nav-links">
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/menus">Menu</Link></li>
-                    <li><Link to="/orders">Order</Link></li>
+                    <li><Link to="/order">Order</Link></li>
                     <li><Link to="/feedback">Review</Link></li>
                     <div className="profile-container">
                         <img
