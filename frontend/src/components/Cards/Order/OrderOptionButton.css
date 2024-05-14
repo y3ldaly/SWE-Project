@@ -1,0 +1,41 @@
+#button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 75px; /*add space between buttons*/
+}
+
+.button {
+    border: 1px solid hsl(0, 0%, 80%);
+    border-radius: 10px;
+    background-color: white;
+    padding: 20px;
+    margin: 10px;
+    cursor: pointer;
+    min-width: 300px;
+    width: 300px;
+    min-height: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button:hover {
+    background-color: red;
+    width: 310px;
+    height: 310px;
+}
+
+.orderoption-button .button-title {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    color: hsl(0, 0%, 20%);
+}
+
+.button-image {
+    max-width: 60%;
+    height: auto;
+    margin-top: 20px;
+}

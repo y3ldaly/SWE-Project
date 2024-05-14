@@ -1,0 +1,75 @@
+body {
+    background-color: #ffffff; /* Set the default background color of the body */
+}
+
+.header {
+    background-color: #9db1ff; /* Red background for the header */
+    color: white; /* White text color */
+    padding: 20px;
+    text-align: center; /* Center the header text */
+    font-size: 20px; /* Set a suitable font size for the header */
+}
+
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+    margin-top: 20px; /* Add space between header and cards */
+}
+
+
+.card {
+    background-color: #ffffff;
+    width: 200px;
+    height: 150px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card p {
+    font-size: 20px;
+    color: #333;
+    font-weight: bold;
+}
+.notification-container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+  }
+  
+  .content {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .home-button {
+    background-color: #ff4136;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+    transition: background-color 0.3s;
+  }
+  
+  .home-button:hover {
+    background-color: #e03830;
+  }
+  
